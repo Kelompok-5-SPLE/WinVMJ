@@ -1,0 +1,50 @@
+namespace RestaurantServiceSystem
+
+features
+	RestaurantServiceSystem {abstract true}
+		mandatory
+			Menu {abstract true}
+				mandatory
+					MenuRegular
+				optional
+					MenuSpecial
+		optional
+			Order
+			Voucher {abstract true}
+				optional
+					Percentage
+					FixedAmount
+			Promo {abstract true}
+				optional
+					ByDate
+					ByMenuCombination
+					ByPaymentMethod
+		mandatory
+			AdminDashboard {abstract true}
+				optional
+					ManageSystems {abstract true}
+						or
+							ManageVouchers
+							ManageSpecialMenu
+							ManageRestoPromo
+							ManageOrder
+				mandatory
+					EditMenu
+		optional
+			Payment {abstract true}
+				optional
+					EWallet
+					Credit
+
+constraints
+	Order => Payment
+	Payment => Order
+	Order => ManageOrder
+	ManageOrder => Order
+	Voucher => ManageVouchers
+	ManageVouchers => Voucher
+	MenuSpecial => ManageSpecialMenu
+	ManageSpecialMenu => MenuSpecial
+	Voucher | Promo => Payment
+	ManageRestoPromo => Promo
+	Promo => ManageRestoPromo
