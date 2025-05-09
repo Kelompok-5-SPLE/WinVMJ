@@ -16,6 +16,5 @@ public interface Menu {
 	public void setCategory(String category);
 	public void createMenu();
 	public void deleteMenu();
-	public void getPrice();
 	HashMap<String, Object> toHashMap();
 }

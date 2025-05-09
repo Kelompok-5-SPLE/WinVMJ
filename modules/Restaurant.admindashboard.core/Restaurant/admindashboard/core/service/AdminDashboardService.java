@@ -1,6 +1,7 @@
 package Restaurant.admindashboard.core;
 import java.util.*;
 
+import Restaurant.admindashboard.core.AdminDashboard;
 import vmj.routing.route.VMJExchange;
 
 public interface AdminDashboardService {
@@ -12,5 +13,5 @@ public interface AdminDashboardService {
     HashMap<String, Object> getAdminDashboardById(int id);
     List<HashMap<String,Object>> getAllAdminDashboard(Map<String, Object> requestBody);
     List<HashMap<String,Object>> deleteAdminDashboard(Map<String, Object> requestBody);
-	List<HashMap<String, Object>> transformListToHashMap(List<Disbursement> List);
+	List<HashMap<String, Object>> transformListToHashMap(List<AdminDashboard> List);
 }

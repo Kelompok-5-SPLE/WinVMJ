@@ -10,7 +10,7 @@ public abstract class AdminDashboardServiceDecorator extends AdminDashboardServi
         this.record = record;
     }
 
-	public AdminDashboardImpl createAdminDashboard(Map<String, Object> requestBody){
+	public AdminDashboard createAdminDashboard(Map<String, Object> requestBody){
 		return record.createAdminDashboard(requestBody);
 	}
 
@@ -34,7 +34,8 @@ public abstract class AdminDashboardServiceDecorator extends AdminDashboardServi
 		return record.updateAdminDashboard(requestBody);
 	}
 
-    public List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List){
+	@Override
+	public List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List) {
 		return record.transformListToHashMap(List);
 	}
 
@@ -47,6 +48,6 @@ public abstract class AdminDashboardServiceDecorator extends AdminDashboardServi
     }
 
 	public void manageEditMenu() {
-		return record.manageEditMenu();
+		this.record.manageEditMenu();
 	}
 }

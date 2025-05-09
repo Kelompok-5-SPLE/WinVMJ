@@ -63,4 +63,14 @@ public class AdminDashboardResourceImpl extends AdminDashboardResourceComponent{
 	public void manageEditMenu() {
 		// TODO: implement this method
 	}
+
+	public AdminDashboard createAdminDashboard(VMJExchange vmjExchange){
+		return null;
+	}
+	public List<HashMap<String,Object>> saveAdminDashboard(VMJExchange vmjExchange){
+		return null;
+	}
+
+	
+	
 }

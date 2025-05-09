@@ -9,5 +9,5 @@ public interface AdminDashboardResource {
     HashMap<String, Object> getAdminDashboard(VMJExchange vmjExchange);
     List<HashMap<String,Object>> getAllAdminDashboard(VMJExchange vmjExchange);
     List<HashMap<String,Object>> deleteAdminDashboard(VMJExchange vmjExchange);
-	HashMap<String, Object> createAdminDashboard(VMJExchange vmjExhange);
+	AdminDashboard createAdminDashboard(VMJExchange vmjExhange);
 }

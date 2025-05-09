@@ -5,11 +5,11 @@
 	<feature automatic="selected" name="MenuRegular"/>
 	<feature manual="selected" name="MenuSpecial"/>
 	<feature automatic="selected" manual="selected" name="Order"/>
-	<feature manual="selected" name="Voucher"/>
-	<feature name="Percentage"/>
+	<feature automatic="selected" manual="selected" name="Voucher"/>
+	<feature manual="selected" name="Percentage"/>
 	<feature name="FixedAmount"/>
-	<feature manual="selected" name="Promo"/>
-	<feature name="ByDate"/>
+	<feature automatic="selected" manual="selected" name="Promo"/>
+	<feature manual="selected" name="ByDate"/>
 	<feature name="ByMenuCombination"/>
 	<feature name="ByPaymentMethod"/>
 	<feature automatic="selected" name="AdminDashboard"/>
@@ -21,5 +21,5 @@
 	<feature automatic="selected" name="EditMenu"/>
 	<feature automatic="selected" name="Payment"/>
 	<feature name="EWallet"/>
-	<feature name="Credit"/>
+	<feature manual="selected" name="Credit"/>
 </configuration>

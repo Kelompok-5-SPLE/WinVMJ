@@ -6,10 +6,10 @@ import vmj.routing.route.VMJExchange;
 //add other required packages
 
 public abstract class AdminDashboardServiceComponent implements AdminDashboardService{
-	protected RepositoryUtil<AdminDashboard> Repository;
+	protected RepositoryUtil<AdminDashboard> admindashboardRepository;
 
     public AdminDashboardServiceComponent(){
-        this.Repository = new RepositoryUtil<AdminDashboard>(Restaurant.admindashboard.core.AdminDashboardComponent.class);
+        this.admindashboardRepository = new RepositoryUtil<AdminDashboard>(Restaurant.admindashboard.core.AdminDashboardComponent.class);
     }	
 
     public abstract List<HashMap<String,Object>> saveAdminDashboard(VMJExchange vmjExchange);
@@ -18,9 +18,10 @@ public abstract class AdminDashboardServiceComponent implements AdminDashboardSe
 	public abstract HashMap<String, Object> updateAdminDashboard(Map<String, Object> requestBody);
     public abstract HashMap<String, Object> getAdminDashboard(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> getAllAdminDashboard(Map<String, Object> requestBody);
-    public abstract List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List);
     public abstract List<HashMap<String,Object>> deleteAdminDashboard(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getAdminDashboardById(int id);
+	public abstract List<HashMap<String, Object>> transformListToHashMap(List<AdminDashboard> List);
+
 
 	public abstract void manageEditMenu();
 }

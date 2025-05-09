@@ -36,19 +36,14 @@ public abstract class MenuDecorator extends MenuComponent{
 		this.objectName=objectName;
 	}
 
-	public MenuDecorator() { }
-
-
 	public void createMenu() {
-		return record.createMenu();
 	}
 
 	public void deleteMenu() {
-		return record.deleteMenu();
 	}
 
-	public void getPrice() {
-		return record.getPrice();
+	public int getPrice() {
+		return 0;
 	}
 
 	public HashMap<String, Object> toHashMap() {

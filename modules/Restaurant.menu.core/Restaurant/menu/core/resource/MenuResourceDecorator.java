@@ -32,14 +32,11 @@ public abstract class MenuResourceDecorator extends MenuResourceComponent{
 	}
 
 	public void createMenu() {
-		return record.createMenu();
 	}
 
 	public void deleteMenu() {
-		return record.deleteMenu();
 	}
 
 	public void getPrice() {
-		return record.getPrice();
 	}
 }

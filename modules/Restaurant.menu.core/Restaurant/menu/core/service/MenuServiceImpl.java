@@ -15,7 +15,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import Restaurant.menu.MenuFactory;
-import prices.auth.vmj.annotations.Restricted;
+// import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 public class MenuServiceImpl extends MenuServiceComponent{

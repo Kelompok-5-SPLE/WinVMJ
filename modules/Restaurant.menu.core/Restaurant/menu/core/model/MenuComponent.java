@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public abstract class MenuComponent implements Menu{
 	@Id
 	public UUID MenuId; 
-	public UUID MenuId;
 	public String name;
 	public String desc;
 	public int price;
@@ -56,8 +55,6 @@ public abstract class MenuComponent implements Menu{
 	public abstract void createMenu();
 
 	public abstract void deleteMenu();
-
-	public abstract void getPrice();
 
 	@Override
     public String toString() {

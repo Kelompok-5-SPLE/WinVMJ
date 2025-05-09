@@ -32,6 +32,6 @@ public abstract class AdminDashboardResourceDecorator extends AdminDashboardReso
 	}
 
 	public void manageEditMenu() {
-		return record.manageEditMenu();
+		this.record.manageEditMenu();
 	}
 }

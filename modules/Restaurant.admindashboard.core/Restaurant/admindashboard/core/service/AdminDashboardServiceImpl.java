@@ -15,46 +15,48 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import Restaurant.admindashboard.AdminDashboardFactory;
-import prices.auth.vmj.annotations.Restricted;
+// import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 public class AdminDashboardServiceImpl extends AdminDashboardServiceComponent{
+
+
 
     public List<HashMap<String,Object>> saveAdminDashboard(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		AdminDashboard admindashboard = createAdminDashboard(vmjExchange);
-		admindashboardRepository.saveObject(admindashboard);
-		return getAllAdminDashboard(vmjExchange);
+		AdminDashboard admindashboard = createAdminDashboard(vmjExchange.getPayload());
+		this.admindashboardRepository.saveObject(admindashboard);
+		return getAllAdminDashboard(vmjExchange.getPayload());
 	}
 
     public AdminDashboard createAdminDashboard(Map<String, Object> requestBody){
 		
 		//to do: fix association attributes
-		AdminDashboard AdminDashboard = AdminDashboardFactory.createAdminDashboard(
+		AdminDashboard adminDashboard = AdminDashboardFactory.createAdminDashboard(
 			"Restaurant.admindashboard.core.AdminDashboardImpl",
-		AdminDashboardId
+		requestBody.get("id")
 		);
-		Repository.saveObject(admindashboard);
-		return admindashboard;
+		this.admindashboardRepository.saveObject(adminDashboard);
+		return adminDashboard;
 	}
 
     public AdminDashboard createAdminDashboard(Map<String, Object> requestBody, int id){
 		
 		//to do: fix association attributes
 		
-		AdminDashboard admindashboard = AdminDashboardFactory.createAdminDashboard("Restaurant.admindashboard.core.AdminDashboardImpl", AdminDashboardId);
+		AdminDashboard admindashboard = AdminDashboardFactory.createAdminDashboard("Restaurant.admindashboard.core.AdminDashboardImpl", id);
 		return admindashboard;
 	}
 
     public HashMap<String, Object> updateAdminDashboard(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("AdminDashboardId");
 		int id = Integer.parseInt(idStr);
-		AdminDashboard admindashboard = Repository.getObject(id);
+		AdminDashboard admindashboard = admindashboardRepository.getObject(id);
 		
 		
-		Repository.updateObject(admindashboard);
+		this.admindashboardRepository.updateObject(admindashboard);
 		
 		//to do: fix association attributes
 		
@@ -63,7 +65,9 @@ public class AdminDashboardServiceImpl extends AdminDashboardServiceComponent{
 	}
 
     public HashMap<String, Object> getAdminDashboard(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> admindashboardList = getAllAdminDashboard("admindashboard_impl");
+		List<HashMap<String, Object>> admindashboardList = getAllAdminDashboard(requestBody);
+		String idStr = ((String) requestBody.get("id"));
+		int id = Integer.parseInt(idStr);
 		for (HashMap<String, Object> admindashboard : admindashboardList){
 			int record_id = ((Double) admindashboard.get("record_id")).intValue();
 			if (record_id == id){
@@ -74,19 +78,19 @@ public class AdminDashboardServiceImpl extends AdminDashboardServiceComponent{
 	}
 
 	public HashMap<String, Object> getAdminDashboardById(int id){
-		String idStr = vmjExchange.getGETParam("AdminDashboardId"); 
-		int id = Integer.parseInt(idStr);
-		AdminDashboard admindashboard = admindashboardRepository.getObject(id);
+		// String idStr = vmjExchange.getGETParam("AdminDashboardId"); 
+		// id = Integer.parseInt(idStr);
+		AdminDashboard admindashboard = this.admindashboardRepository.getObject(id);
 		return admindashboard.toHashMap();
 	}
 
     public List<HashMap<String,Object>> getAllAdminDashboard(Map<String, Object> requestBody){
 		String table = (String) requestBody.get("table_name");
-		List<AdminDashboard> List = Repository.getAllObject(table);
+		List<AdminDashboard> List = this.admindashboardRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
 
-    public List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List){
+	public List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i < List.size(); i++) {
             resultList.add(List.get(i).toHashMap());
@@ -98,11 +102,21 @@ public class AdminDashboardServiceImpl extends AdminDashboardServiceComponent{
     public List<HashMap<String,Object>> deleteAdminDashboard(Map<String, Object> requestBody){
 		String idStr = ((String) requestBody.get("id"));
 		int id = Integer.parseInt(idStr);
-		Repository.deleteObject(id);
+		this.admindashboardRepository.deleteObject(id);
 		return getAllAdminDashboard(requestBody);
 	}
 
 	public void manageEditMenu() {
 		// TODO: implement this method
 	}
+
+	public AdminDashboard createAdminDashboard(Map<String, Object> requestBody, Map<String, Object> response){
+		return null;
+	}
+
+	public List<HashMap<String,Object>> saveAdminDashboard(Map<String, Object> requestBody){
+		return null;
+	}
+
+
 }

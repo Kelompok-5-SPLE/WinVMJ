@@ -20,14 +20,6 @@ import javax.persistence.OneToMany;
 public class MenuImpl extends MenuComponent {
 
 	public MenuImpl(UUID MenuId, String name, String desc, int price, String category) {
-		this.MenuId = MenuId;
-		this.name = name;
-		this.desc = desc;
-		this.price = price;
-		this.category = category;
-	}
-
-	public MenuImpl(UUID MenuId, String name, String desc, int price, String category) {
 		this.MenuId =  MenuId.randomUUID();;
 		this.MenuId = MenuId;
 		this.name = name;
@@ -47,8 +39,8 @@ public class MenuImpl extends MenuComponent {
 		// TODO: implement this method
 	}
 
-	public void getPrice() {
-		// TODO: implement this method
+	public int getPrice() {
+		return 0;
 	}
 	
 	public HashMap<String, Object> toHashMap() {
@@ -61,5 +53,48 @@ public class MenuImpl extends MenuComponent {
 
         return menuMap;
     }
+
+	public void setCategory(String category){}
+
+	@Override
+	public UUID getMenuId() {
+		return null;
+	}
+
+	@Override
+	public void setMenuId(UUID menuId) {
+		// pass
+	}
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// pass
+	}
+
+	@Override
+	public String getDesc() {
+		return null;
+	}
+
+	@Override
+	public void setDesc(String desc) {
+		// pass
+	}
+
+	@Override
+	public void setPrice(int price) {
+		// pass
+	}
+
+	@Override
+	public String getCategory() {
+		return null;
+	}
+	
 
 }

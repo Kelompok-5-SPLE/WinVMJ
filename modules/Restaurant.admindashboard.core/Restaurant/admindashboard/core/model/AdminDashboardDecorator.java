@@ -36,11 +36,8 @@ public abstract class AdminDashboardDecorator extends AdminDashboardComponent{
 		this.objectName=objectName;
 	}
 
-	public AdminDashboardDecorator() { }
-
-
 	public void manageEditMenu() {
-		return record.manageEditMenu();
+		this.record.manageEditMenu();
 	}
 
 	public HashMap<String, Object> toHashMap() {
