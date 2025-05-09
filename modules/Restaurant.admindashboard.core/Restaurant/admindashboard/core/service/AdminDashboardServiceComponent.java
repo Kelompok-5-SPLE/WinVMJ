@@ -20,7 +20,6 @@ public abstract class AdminDashboardServiceComponent implements AdminDashboardSe
     public abstract List<HashMap<String,Object>> getAllAdminDashboard(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> deleteAdminDashboard(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getAdminDashboardById(int id);
-	public abstract List<HashMap<String, Object>> transformListToHashMap(List<AdminDashboard> List);
 
 
 	public abstract void manageEditMenu();

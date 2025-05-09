@@ -35,7 +35,7 @@ public abstract class AdminDashboardServiceDecorator extends AdminDashboardServi
 	}
 
 	@Override
-	public List<HashMap<String,Object>> transformListToHashMap(List<AdminDashboard> List) {
+	public List<HashMap<String, Object>> transformListToHashMap(List<AdminDashboard> List) {
 		return record.transformListToHashMap(List);
 	}
 

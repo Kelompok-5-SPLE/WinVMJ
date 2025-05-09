@@ -6,10 +6,10 @@ import vmj.routing.route.VMJExchange;
 //add other required packages
 
 public abstract class MenuServiceComponent implements MenuService{
-	protected RepositoryUtil<Menu> Repository;
+	protected RepositoryUtil<Menu> menuRepository;
 
     public MenuServiceComponent(){
-        this.Repository = new RepositoryUtil<Menu>(Restaurant.menu.core.MenuComponent.class);
+        this.menuRepository = new RepositoryUtil<Menu>(Restaurant.menu.core.MenuComponent.class);
     }	
 
     public abstract List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange);
