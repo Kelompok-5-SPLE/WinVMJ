@@ -9,8 +9,19 @@ import Restaurant.menu.MenuFactory;
 //add other required packages
 
 public class MenuResourceImpl extends MenuResourceComponent{
+	public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
+		return null;
+	}
+
+
 	
 	private MenuServiceImpl menuServiceImpl = new MenuServiceImpl();
+
+	public Menu createMenu(VMJExchange vmjExchange){
+		return null;
+	}
+
+	public void createMenu() {}
 
 	// @Restriced(permission = "")
     @Route(url="call/menu")
@@ -60,9 +71,6 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		return menuServiceImpl.deleteMenu(requestBody);
 	}
 
-	public void createMenu() {
-		// TODO: implement this method
-	}
 
 	public void deleteMenu() {
 		// TODO: implement this method

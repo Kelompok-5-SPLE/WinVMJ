@@ -17,7 +17,7 @@ public abstract class MenuComponent implements Menu{
 	@Id
 	public UUID MenuId; 
 	public String name;
-	public String desc;
+	public String description;
 	public int price;
 	public String category;
 	protected String objectName = MenuComponent.class.getName();
@@ -27,11 +27,11 @@ public abstract class MenuComponent implements Menu{
 	} 
 
 	public MenuComponent(
-        UUID MenuId, String name, String desc, int price, String category
+        UUID MenuId, String name, String description, int price, String category
     ) {
         this.MenuId = MenuId;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.price = price;
         this.category = category;
     }
@@ -42,8 +42,8 @@ public abstract class MenuComponent implements Menu{
 	public abstract String getName();
 	public abstract void setName(String name);
 	
-	public abstract String getDesc();
-	public abstract void setDesc(String desc);
+	public abstract String getDescription();
+	public abstract void setDescription(String description);
 	
 	public abstract int getPrice();
 	public abstract void setPrice(int price);
@@ -61,7 +61,7 @@ public abstract class MenuComponent implements Menu{
         return "{" +
             " MenuId='" + getMenuId() + "'" +
             " name='" + getName() + "'" +
-            " desc='" + getDesc() + "'" +
+            " description='" + getDescription() + "'" +
             " price='" + getPrice() + "'" +
             " category='" + getCategory() + "'" +
             "}";

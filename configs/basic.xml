@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="RestaurantServiceSystem"/>
+	<feature automatic="selected" name="Menu"/>
+	<feature automatic="selected" name="MenuRegular"/>
+	<feature name="MenuSpecial"/>
+	<feature name="Order"/>
+	<feature name="Voucher"/>
+	<feature name="Percentage"/>
+	<feature name="FixedAmount"/>
+	<feature name="Promo"/>
+	<feature name="ByDate"/>
+	<feature name="ByMenuCombination"/>
+	<feature name="ByPaymentMethod"/>
+	<feature automatic="selected" name="AdminDashboard"/>
+	<feature name="ManageSystems"/>
+	<feature name="ManageVouchers"/>
+	<feature name="ManageSpecialMenu"/>
+	<feature name="ManageRestoPromo"/>
+	<feature name="ManageOrder"/>
+	<feature automatic="selected" name="EditMenu"/>
+	<feature name="Payment"/>
+	<feature name="EWallet"/>
+	<feature name="Credit"/>
+</configuration>

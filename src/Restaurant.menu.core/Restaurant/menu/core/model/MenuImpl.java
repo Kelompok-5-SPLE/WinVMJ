@@ -19,19 +19,10 @@ import javax.persistence.OneToMany;
 @Table(name="menu_impl")
 public class MenuImpl extends MenuComponent {
 
-	public MenuImpl(UUID MenuId, String name, String desc, int price, String category) {
-		this.MenuId = MenuId;
+	public MenuImpl(String name, String desc, int price, String category) {
+		this.MenuId =  UUID.randomUUID();
 		this.name = name;
-		this.desc = desc;
-		this.price = price;
-		this.category = category;
-	}
-
-	public MenuImpl(UUID MenuId, String name, String desc, int price, String category) {
-		this.MenuId =  MenuId.randomUUID();;
-		this.MenuId = MenuId;
-		this.name = name;
-		this.desc = desc;
+		this.description = desc;
 		this.price = price;
 		this.category = category;
 	}
@@ -47,19 +38,62 @@ public class MenuImpl extends MenuComponent {
 		// TODO: implement this method
 	}
 
-	public void getPrice() {
-		// TODO: implement this method
+	public int getPrice() {
+		return 0;
 	}
 	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> menuMap = new HashMap<String,Object>();
 		menuMap.put("MenuId",getMenuId());
 		menuMap.put("name",getName());
-		menuMap.put("desc",getDesc());
+		menuMap.put("desc",getDescription());
 		menuMap.put("price",getPrice());
 		menuMap.put("category",getCategory());
 
         return menuMap;
     }
+
+	public void setCategory(String category){}
+
+	@Override
+	public UUID getMenuId() {
+		return null;
+	}
+
+	@Override
+	public void setMenuId(UUID menuId) {
+		// pass
+	}
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// pass
+	}
+
+	@Override
+	public String getDescription() {
+		return null;
+	}
+
+	@Override
+	public void setDescription(String desc) {
+		// pass
+	}
+
+	@Override
+	public void setPrice(int price) {
+		// pass
+	}
+
+	@Override
+	public String getCategory() {
+		return null;
+	}
+	
 
 }

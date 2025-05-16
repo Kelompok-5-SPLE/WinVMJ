@@ -1,1 +1,4 @@
-{}
+{
+    "MenuRegular":["Restaurant.menu.core"],
+    "Menu":["Restaurant.menu.core"]
+}

@@ -19,11 +19,10 @@ import javax.persistence.OneToMany;
 @Table(name="menu_impl")
 public class MenuImpl extends MenuComponent {
 
-	public MenuImpl(UUID MenuId, String name, String desc, int price, String category) {
-		this.MenuId =  MenuId.randomUUID();;
-		this.MenuId = MenuId;
+	public MenuImpl(String name, String desc, int price, String category) {
+		this.MenuId =  UUID.randomUUID();
 		this.name = name;
-		this.desc = desc;
+		this.description = desc;
 		this.price = price;
 		this.category = category;
 	}
@@ -47,7 +46,7 @@ public class MenuImpl extends MenuComponent {
         HashMap<String, Object> menuMap = new HashMap<String,Object>();
 		menuMap.put("MenuId",getMenuId());
 		menuMap.put("name",getName());
-		menuMap.put("desc",getDesc());
+		menuMap.put("desc",getDescription());
 		menuMap.put("price",getPrice());
 		menuMap.put("category",getCategory());
 
@@ -77,12 +76,12 @@ public class MenuImpl extends MenuComponent {
 	}
 
 	@Override
-	public String getDesc() {
+	public String getDescription() {
 		return null;
 	}
 
 	@Override
-	public void setDesc(String desc) {
+	public void setDescription(String desc) {
 		// pass
 	}
 

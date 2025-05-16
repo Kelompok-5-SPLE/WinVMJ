@@ -10,7 +10,7 @@ public abstract class MenuServiceDecorator extends MenuServiceComponent{
         this.record = record;
     }
 
-	public MenuImpl createMenu(Map<String, Object> requestBody){
+	public Menu createMenu(Map<String, Object> requestBody){
 		return record.createMenu(requestBody);
 	}
 
@@ -47,14 +47,11 @@ public abstract class MenuServiceDecorator extends MenuServiceComponent{
     }
 
 	public void createMenu() {
-		return record.createMenu();
 	}
 
 	public void deleteMenu() {
-		return record.deleteMenu();
 	}
 
 	public void getPrice() {
-		return record.getPrice();
 	}
 }

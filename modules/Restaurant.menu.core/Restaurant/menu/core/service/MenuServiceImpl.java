@@ -38,7 +38,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 
     public Menu createMenu(Map<String, Object> requestBody){
 		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("desc");
+		String desc = (String) requestBody.get("description");
 		String priceStr = (String) requestBody.get("price");
 		int price = Integer.parseInt(priceStr);
 		String category = (String) requestBody.get("category");
@@ -57,7 +57,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 
     public Menu createMenu(Map<String, Object> requestBody, int id){
 		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("desc");
+		String desc = (String) requestBody.get("description");
 		String priceStr = (String) requestBody.get("price");
 		int price = Integer.parseInt(priceStr);
 		String category = (String) requestBody.get("category");
@@ -74,7 +74,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		Menu menu =this.menuRepository.getObject(id);
 		
 		menu.setName((String) requestBody.get("name"));
-		menu.setDesc((String) requestBody.get("desc"));
+		menu.setDescription((String) requestBody.get("description"));
 		String priceStr = (String) requestBody.get("price");
 		menu.setPrice(Integer.parseInt(priceStr));
 		menu.setCategory((String) requestBody.get("category"));
@@ -90,7 +90,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
 		List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
 		String idStr = ((String) requestBody.get("id"));
-		int id = Integer.parseInt(idStr);
+		UUID id = UUID.fromString(idStr);
 		for (HashMap<String, Object> menu : menuList){
 			int record_id = ((Double) menu.get("record_id")).intValue();
 			if (record_id == id){
