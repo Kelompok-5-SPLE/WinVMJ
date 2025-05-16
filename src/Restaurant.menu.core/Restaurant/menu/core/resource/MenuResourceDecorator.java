@@ -11,8 +11,16 @@ public abstract class MenuResourceDecorator extends MenuResourceComponent{
         this.record = record;
     }
 
+    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
+		return record.saveMenu(vmjExchange);
+	}
+
     public Menu createMenu(VMJExchange vmjExchange){
 		return record.createMenu(vmjExchange);
+	}
+
+    public Menu createMenu(VMJExchange vmjExchange, int id){
+		return record.createMenu(vmjExchange, id);
 	}
 
     public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){
@@ -31,12 +39,4 @@ public abstract class MenuResourceDecorator extends MenuResourceComponent{
 		return record.deleteMenu(vmjExchange);
 	}
 
-	public void createMenu() {
-	}
-
-	public void deleteMenu() {
-	}
-
-	public void getPrice() {
-	}
 }

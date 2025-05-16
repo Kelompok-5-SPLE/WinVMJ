@@ -12,5 +12,5 @@ public interface MenuService {
     HashMap<String, Object> getMenuById(int id);
     List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody);
     List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody);
-	List<HashMap<String, Object>> transformListToHashMap(List<Menu> List);
+	List<HashMap<String, Object>> transformListToHashMap(List<Disbursement> List);
 }

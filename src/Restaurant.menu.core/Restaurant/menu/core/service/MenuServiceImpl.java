@@ -15,63 +15,57 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import Restaurant.menu.MenuFactory;
-// import prices.auth.vmj.annotations.Restricted;
+import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 public class MenuServiceImpl extends MenuServiceComponent{
 
-	public List<HashMap<String,Object>> saveMenu(Map<String, Object> requestBody){
-		return null;
-	}
-
-
-
-	@Override
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange) {
+    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		Menu menu = createMenu(vmjExchange.getPayload());
-		this.menuRepository.saveObject(menu);
-		return getAllMenu(vmjExchange.getPayload());
+		Menu menu = createMenu(vmjExchange);
+		menuRepository.saveObject(menu);
+		return getAllMenu(vmjExchange);
 	}
 
     public Menu createMenu(Map<String, Object> requestBody){
 		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("description");
+		String description = (String) requestBody.get("description");
 		String priceStr = (String) requestBody.get("price");
 		int price = Integer.parseInt(priceStr);
 		String category = (String) requestBody.get("category");
 		
 		//to do: fix association attributes
-		Menu menu = MenuFactory.createMenu(
+		Menu Menu = MenuFactory.createMenu(
 			"Restaurant.menu.core.MenuImpl",
-		name
-		, desc
+		MenuId
+		, name
+		, description
 		, price
 		, category
 		);
-		this.menuRepository.saveObject(menu);
+		Repository.saveObject(menu);
 		return menu;
 	}
 
     public Menu createMenu(Map<String, Object> requestBody, int id){
-		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("description");
-		String priceStr = (String) requestBody.get("price");
+		String name = (String) vmjExchange.getRequestBodyForm("name");
+		String description = (String) vmjExchange.getRequestBodyForm("description");
+		String priceStr = (String) vmjExchange.getRequestBodyForm("price");
 		int price = Integer.parseInt(priceStr);
-		String category = (String) requestBody.get("category");
+		String category = (String) vmjExchange.getRequestBodyForm("category");
 		
 		//to do: fix association attributes
 		
-		Menu menu = MenuFactory.createMenu("Restaurant.menu.core.MenuImpl", name, desc, price, category);
+		Menu menu = MenuFactory.createMenu("Restaurant.menu.core.MenuImpl", MenuId, name, description, price, category);
 		return menu;
 	}
 
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("MenuId");
 		int id = Integer.parseInt(idStr);
-		Menu menu =this.menuRepository.getObject(id);
+		Menu menu = Repository.getObject(id);
 		
 		menu.setName((String) requestBody.get("name"));
 		menu.setDescription((String) requestBody.get("description"));
@@ -79,7 +73,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		menu.setPrice(Integer.parseInt(priceStr));
 		menu.setCategory((String) requestBody.get("category"));
 		
-		this.menuRepository.updateObject(menu);
+		Repository.updateObject(menu);
 		
 		//to do: fix association attributes
 		
@@ -88,9 +82,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
-		String idStr = ((String) requestBody.get("id"));
-		UUID id = UUID.fromString(idStr);
+		List<HashMap<String, Object>> menuList = getAllMenu("menu_impl");
 		for (HashMap<String, Object> menu : menuList){
 			int record_id = ((Double) menu.get("record_id")).intValue();
 			if (record_id == id){
@@ -101,13 +93,15 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
 	public HashMap<String, Object> getMenuById(int id){
-		Menu menu = this.menuRepository.getObject(id);
+		String idStr = vmjExchange.getGETParam("MenuId"); 
+		int id = Integer.parseInt(idStr);
+		Menu menu = menuRepository.getObject(id);
 		return menu.toHashMap();
 	}
 
     public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
 		String table = (String) requestBody.get("table_name");
-		List<Menu> List =this.menuRepository.getAllObject(table);
+		List<Menu> List = Repository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
 
@@ -123,24 +117,8 @@ public class MenuServiceImpl extends MenuServiceComponent{
     public List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody){
 		String idStr = ((String) requestBody.get("id"));
 		int id = Integer.parseInt(idStr);
-		this.menuRepository.deleteObject(id);
+		Repository.deleteObject(id);
 		return getAllMenu(requestBody);
 	}
-
-	public void createMenu() {
-		// TODO: implement this method
-	}
-
-	public void deleteMenu() {
-		// TODO: implement this method
-	}
-
-	public void getPrice() {
-		// TODO: implement this method
-	}
-
-	public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){
-		return null;
-	}  
 
 }

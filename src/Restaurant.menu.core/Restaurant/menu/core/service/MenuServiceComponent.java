@@ -6,10 +6,10 @@ import vmj.routing.route.VMJExchange;
 //add other required packages
 
 public abstract class MenuServiceComponent implements MenuService{
-	protected RepositoryUtil<Menu> menuRepository;
+	protected RepositoryUtil<Menu> Repository;
 
     public MenuServiceComponent(){
-        this.menuRepository = new RepositoryUtil<Menu>(Restaurant.menu.core.MenuComponent.class);
+        this.Repository = new RepositoryUtil<Menu>(Restaurant.menu.core.MenuComponent.class);
     }	
 
     public abstract List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange);
@@ -22,9 +22,4 @@ public abstract class MenuServiceComponent implements MenuService{
     public abstract List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getMenuById(int id);
 
-	public abstract void createMenu();
-
-	public abstract void deleteMenu();
-
-	public abstract void getPrice();
 }

@@ -88,17 +88,18 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
-		String idStr = ((String) requestBody.get("id"));
-		UUID id = UUID.fromString(idStr);
-		for (HashMap<String, Object> menu : menuList){
-			int record_id = ((Double) menu.get("record_id")).intValue();
-			if (record_id == id){
-				return menu;
-			}
-		}
-		return null;
-	}
+    List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
+    String idStr = ((String) requestBody.get("id"));
+    UUID id = UUID.fromString(idStr);
+    for (HashMap<String,Object> menu : menuList){
+        // Convert both to string and compare
+        String record_id_str = String.valueOf(((Double) menu.get("record_id")).intValue());
+        if (record_id_str.equals(idStr)){
+            return menu;
+        }
+    }
+    return null;
+}
 
 	public HashMap<String, Object> getMenuById(int id){
 		Menu menu = this.menuRepository.getObject(id);

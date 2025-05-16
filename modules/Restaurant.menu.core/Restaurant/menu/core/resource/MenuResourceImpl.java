@@ -5,27 +5,23 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import Restaurant.menu.MenuFactory;
-//import prices.auth.vmj.annotations.Restricted;
+// import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
+
 public class MenuResourceImpl extends MenuResourceComponent{
-	public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		return null;
-	}
-
-
 	
 	private MenuServiceImpl menuServiceImpl = new MenuServiceImpl();
 
-	public Menu createMenu(VMJExchange vmjExchange){
+	// @Restriced(permission = "")
+    @Route(url="call/menu/save")
+    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
 		return null;
 	}
 
-	public void createMenu() {}
-
 	// @Restriced(permission = "")
     @Route(url="call/menu")
-    public HashMap<String,Object> createmenu(VMJExchange vmjExchange){
+    public HashMap<String,Object> menu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody);
@@ -34,7 +30,25 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    // @Restriced(permission = "")
+    public Menu createMenu(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody);
+			return result;
+		}
+		throw new NotFoundException("Route tidak ditemukan");
+	}
+
+    public Menu createMenu(VMJExchange vmjExchange, int id){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody, id);
+			return result;
+		}
+		throw new NotFoundException("Route tidak ditemukan");
+	}
+
+	// @Restriced(permission = "")
     @Route(url="call/menu/update")
     public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -59,7 +73,6 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		return menuServiceImpl.getAllMenu(requestBody);
 	}
 
-    
 	// @Restriced(permission = "")
     @Route(url="call/menu/delete")
     public List<HashMap<String,Object>> deleteMenu(VMJExchange vmjExchange){
@@ -72,11 +85,4 @@ public class MenuResourceImpl extends MenuResourceComponent{
 	}
 
 
-	public void deleteMenu() {
-		// TODO: implement this method
-	}
-
-	public void getPrice() {
-		// TODO: implement this method
-	}
 }

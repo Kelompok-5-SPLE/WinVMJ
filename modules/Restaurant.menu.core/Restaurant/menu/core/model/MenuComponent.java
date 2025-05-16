@@ -52,9 +52,6 @@ public abstract class MenuComponent implements Menu{
 	public abstract void setCategory(String category);
 	
  
-	public abstract void createMenu();
-
-	public abstract void deleteMenu();
 
 	@Override
     public String toString() {
