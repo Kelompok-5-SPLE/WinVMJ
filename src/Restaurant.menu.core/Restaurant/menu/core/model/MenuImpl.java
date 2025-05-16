@@ -19,24 +19,14 @@ import javax.persistence.OneToMany;
 @Table(name="menu_impl")
 public class MenuImpl extends MenuComponent {
 
-	public MenuImpl(UUID MenuId, String name, String description, int price, String category) {
-		this.MenuId = MenuId;
+	public MenuImpl(String name, String description, int price, String category) {
+		this.MenuId =  UUID.randomUUID();
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
 	}
 
-	public MenuImpl(UUID MenuId, String name, String description, int price, String category) {
-		this.MenuId =  MenuId.randomUUID();;
-		this.MenuId = MenuId;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.category = category;
-	}
-
-	public MenuImpl() { }
 
 
 	
@@ -50,5 +40,43 @@ public class MenuImpl extends MenuComponent {
 
         return menuMap;
     }
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
+	public String getCategory() {
+		return this.category;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public UUID getMenuId() {
+		return this.MenuId;
+	}
+
+	public void setMenuId(UUID MenuId) {
+		this.MenuId = MenuId;
+	}
 }

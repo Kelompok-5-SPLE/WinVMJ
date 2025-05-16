@@ -1,6 +1,7 @@
-module Restaurant.menu.core {
-	exports Restaurant.menu;
-    exports Restaurant.menu.core;
+module Restaurant.menu.traditionalmenu {
+	requires Restaurant.menu.core;
+    exports Restaurant.menu.traditionalmenu;
+
 	requires vmj.routing.route;
 	requires vmj.hibernate.integrator;
 	requires vmj.auth;
@@ -9,5 +10,5 @@ module Restaurant.menu.core {
 	requires java.naming;
 	requires java.net.http;
 
-	opens Restaurant.menu.core to org.hibernate.orm.core, gson, vmj.hibernate.integrator;
+	opens Restaurant.menu.traditionalmenu to org.hibernate.orm.core, gson, vmj.hibernate.integrator;
 }

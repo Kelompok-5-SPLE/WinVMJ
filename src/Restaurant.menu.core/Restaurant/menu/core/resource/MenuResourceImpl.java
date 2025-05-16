@@ -5,7 +5,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import Restaurant.menu.MenuFactory;
-import prices.auth.vmj.annotations.Restricted;
+// import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 
@@ -16,12 +16,7 @@ public class MenuResourceImpl extends MenuResourceComponent{
 	// @Restriced(permission = "")
     @Route(url="call/menu/save")
     public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
-		}
-		Menu menu = createMenu(vmjExchange);
-		menuRepository.saveObject(menu);
-		return getAllMenu(vmjExchange);
+		return null;
 	}
 
 	// @Restriced(permission = "")
@@ -39,7 +34,7 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody);
-			return result.toHashMap();
+			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}
@@ -48,7 +43,7 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody, id);
-			return result.toHashMap();
+			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}

@@ -36,7 +36,9 @@ public abstract class MenuDecorator extends MenuComponent{
 		this.objectName=objectName;
 	}
 
-	public MenuDecorator() { }
+	public void setCategory(String category) {
+		this.record.setCategory(category);
+	}
 
 
 

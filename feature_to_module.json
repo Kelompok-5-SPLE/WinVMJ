@@ -1,4 +1,5 @@
 {
-    "MenuRegular":["Restaurant.menu.core"],
-    "Menu":["Restaurant.menu.core"]
+    "Menu":["Restaurant.menu.core"],
+    "SeasonalMenu":["Restaurant.menu.seaonalmenu"]
+    
 }

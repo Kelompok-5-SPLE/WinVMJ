@@ -9,5 +9,4 @@ public interface MenuResource {
     HashMap<String, Object> getMenu(VMJExchange vmjExchange);
     List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange);
     List<HashMap<String,Object>> deleteMenu(VMJExchange vmjExchange);
-	HashMap<String, Object> Menu(VMJExchange vmjExhange);
 }
