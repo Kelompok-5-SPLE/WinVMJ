@@ -2,10 +2,10 @@
 <configuration>
 	<feature automatic="selected" name="RestaurantServiceSystem"/>
 	<feature automatic="selected" name="Menu"/>
-	<feature manual="selected" name="SeasonalMenu"/>
-	<feature name="PromotionalMenu"/>
+	<feature name="SeasonalMenu"/>
+	<feature manual="selected" name="PromotionalMenu"/>
 	<feature name="BeverageMenu"/>
-	<feature name="KidsMenu"/>
+	<feature manual="selected" name="KidsMenu"/>
 	<feature name="SpicyMenu"/>
-	<feature name="TraditionalMenu"/>
+	<feature manual="selected" name="TraditionalMenu"/>
 </configuration>

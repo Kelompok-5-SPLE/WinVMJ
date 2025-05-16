@@ -28,7 +28,7 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 		String Origin = (String) vmjExchange.getRequestBodyForm("Origin");
 		
 		MenuTraditionalMenu menutraditionalmenu = record.createMenuTraditionalMenu(vmjExchange);
-		MenuTraditionalMenu menutraditionalmenudeco = MenuTraditionalMenuFactory.createMenuTraditionalMenu("Restaurant.traditionalmenu.core.MenuImpl", menutraditionalmenu, MenuId, name, description, price, category
+		MenuTraditionalMenu menutraditionalmenudeco = MenuTraditionalMenuFactory.createMenuTraditionalMenu("Restaurant.traditionalmenu.core.MenuImpl", menutraditionalmenu,
 		Origin
 		);
 			return menutraditionalmenudeco;
@@ -38,10 +38,10 @@ public class MenuResourceImpl extends MenuResourceDecorator {
     public Menu createMenuTraditionalMenu(VMJExchange vmjExchange, int id){
 		String Origin = (String) vmjExchange.getRequestBodyForm("Origin");
 		MenuTraditionalMenu menutraditionalmenu = menutraditionalmenuRepository.getObject(id);
-		int recordMenuTraditionalMenuId = (((MenuTraditionalMenuDecorator) savedMenuTraditionalMenu.getRecord()).getId();
+		int recordMenuTraditionalMenuId = ((MenuTraditionalMenuDecorator) savedMenuTraditionalMenu.getRecord()).getId();
 		
-		MenuTraditionalMenu menutraditionalmenu = record.createMenuTraditionalMenu(vmjExchange);
-		MenuTraditionalMenu menutraditionalmenudeco = MenuTraditionalMenuFactory.createMenuTraditionalMenu("Restaurant.traditionalmenu.core.MenuImpl", id, menutraditionalmenu, MenuId, name, description, price, category
+		menutraditionalmenu = record.createMenuTraditionalMenu(vmjExchange);
+		MenuTraditionalMenu menutraditionalmenudeco = MenuTraditionalMenuFactory.createMenuTraditionalMenu("Restaurant.traditionalmenu.core.MenuImpl", id, menutraditionalmenu, MenuId, name, description, price, category,
 		Origin
 		);
 			return menutraditionalmenudeco;
@@ -56,11 +56,11 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
 		int id = Integer.parseInt(idStr);
 		
-		MenuTraditionalMenu menutraditionalmenu = menutraditionalmenuRepository.getObject(id);
+		MenuTraditionalMenu menutraditionalmenu = Repository.getObject(id);
 		menutraditionalmenu = createMenuTraditionalMenu(vmjExchange, id);
 		
-		menutraditionalmenuRepository.updateObject(menutraditionalmenu);
-		menutraditionalmenu = menutraditionalmenuRepository.getObject(id);
+		Repository.updateObject(menutraditionalmenu);
+		menutraditionalmenu = Repository.getObject(id);
 		//to do: fix association attributes
 		
 		return menutraditionalmenu.toHashMap();
@@ -76,7 +76,7 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 	// @Restriced(permission = "")
     @Route(url="call/traditionalmenu/list")
     public List<HashMap<String,Object>> getAllMenuTraditionalMenu(VMJExchange vmjExchange){
-		List<MenuTraditionalMenu> menutraditionalmenuList = menutraditionalmenuRepository.getAllObject("menutraditionalmenu_impl");
+		List<MenuTraditionalMenu> menutraditionalmenuList = Repository.getAllObject("menutraditionalmenu_impl");
 		return transformMenuTraditionalMenuListToHashMap(menutraditionalmenuList);
 	}
 
@@ -98,8 +98,12 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 		
 		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
 		int id = Integer.parseInt(idStr);
-		menutraditionalmenuRepository.deleteObject(id);
+		menuRepository.deleteObject(id);
 		return getAllMenuTraditionalMenu(vmjExchange);
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	

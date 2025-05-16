@@ -36,11 +36,6 @@ public abstract class MenuDecorator extends MenuComponent{
 		this.objectName=objectName;
 	}
 
-	public void setCategory(String category) {
-		this.record.setCategory(category);
-	}
-
-
 
 	public HashMap<String, Object> toHashMap() {
         return this.record.toHashMap();
