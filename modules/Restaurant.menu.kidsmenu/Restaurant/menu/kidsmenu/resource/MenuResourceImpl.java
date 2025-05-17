@@ -4,104 +4,88 @@ import java.util.*;
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
-import Restaurant.menu.core.MenuResourceDecorator;
-import Restaurant.menu.core.MenuImpl;
-import Restaurant.menu.core.MenuResourceComponent;
+import Restaurant.menu.MenuFactory;
+
+import vmj.routing.route.exceptions.*;
+
+
+
+import Restaurant.menu.core.*;
+import Restaurant.menu.kidsmenu.MenuImpl;
+import Restaurant.menu.kidsmenu.MenuServiceImpl;
+
 
 public class MenuResourceImpl extends MenuResourceDecorator {
-    public MenuResourceImpl (MenuResourceComponent record) {
-        super(record);
+
+	private MenuServiceImpl menuServiceImpl;
+
+    public MenuResourceImpl (MenuResourceComponent recordResource, MenuServiceComponent recordService) {
+        super(recordResource);
+		this.menuServiceImpl = new MenuServiceImpl(recordService);
     }
 
     // @Restriced(permission = "")
     @Route(url="call/kidsmenu/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		MenuKidsMenu menukidsmenu = createMenuKidsMenu(vmjExchange);
-		menukidsmenuRepository.saveObject(menukidsmenu);
-		return getAllMenuKidsMenu(vmjExchange);
+        String email =  vmjExchange.getAuthPayload().getEmail();
+		List<HashMap<String,Object>> menu = menuServiceImpl.saveMenu(vmjExchange);
+		return menu;
 	}
 
-    public Menu createMenuKidsMenu(VMJExchange vmjExchange){
-		String AgeRestrictionStr = (String) vmjExchange.getRequestBodyForm("AgeRestriction");
-		int AgeRestriction = Integer.parseInt(AgeRestrictionStr);
-		
-		MenuKidsMenu menukidsmenu = record.createMenuKidsMenu(vmjExchange);
-		MenuKidsMenu menukidsmenudeco = MenuKidsMenuFactory.createMenuKidsMenu("Restaurant.kidsmenu.core.MenuImpl", menukidsmenu, MenuId, name, description, price, category
-		AgeRestriction
-		);
-			return menukidsmenudeco;
+    public Menu createMenu(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody);
+			return result;
+		}
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 
-    public Menu createMenuKidsMenu(VMJExchange vmjExchange, int id){
-		String AgeRestrictionStr = (String) vmjExchange.getRequestBodyForm("AgeRestriction");
-		int AgeRestriction = Integer.parseInt(AgeRestrictionStr);
-		MenuKidsMenu menukidsmenu = menukidsmenuRepository.getObject(id);
-		int recordMenuKidsMenuId = (((MenuKidsMenuDecorator) savedMenuKidsMenu.getRecord()).getId();
-		
-		MenuKidsMenu menukidsmenu = record.createMenuKidsMenu(vmjExchange);
-		MenuKidsMenu menukidsmenudeco = MenuKidsMenuFactory.createMenuKidsMenu("Restaurant.kidsmenu.core.MenuImpl", id, menukidsmenu, MenuId, name, description, price, category
-		AgeRestriction
-		);
-			return menukidsmenudeco;
+    public Menu createMenu(VMJExchange vmjExchange, int id){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody, id);
+			return result;
+		}
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/kidsmenu/update")
-    public HashMap<String, Object> updateMenuKidsMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+    public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")){
 			return null;
 		}
-		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
-		int id = Integer.parseInt(idStr);
-		
-		MenuKidsMenu menukidsmenu = menukidsmenuRepository.getObject(id);
-		menukidsmenu = createMenuKidsMenu(vmjExchange, id);
-		
-		menukidsmenuRepository.updateObject(menukidsmenu);
-		menukidsmenu = menukidsmenuRepository.getObject(id);
-		//to do: fix association attributes
-		
-		return menukidsmenu.toHashMap();
+		return menuServiceImpl.updateMenu(requestBody);
 		
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/kidsmenu/detail")
-    public HashMap<String, Object> getMenuKidsMenu(VMJExchange vmjExchange){
-		return record.getMenuKidsMenu(vmjExchange);
-	}
+    public HashMap<String, Object> getMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		return menuServiceImpl.getMenu(requestBody);	}
 
 	// @Restriced(permission = "")
     @Route(url="call/kidsmenu/list")
-    public List<HashMap<String,Object>> getAllMenuKidsMenu(VMJExchange vmjExchange){
-		List<MenuKidsMenu> menukidsmenuList = menukidsmenuRepository.getAllObject("menukidsmenu_impl");
-		return transformMenuKidsMenuListToHashMap(menukidsmenuList);
-	}
-
-    public List<HashMap<String,Object>> transformMenuKidsMenuListToHashMap(List<MenuKidsMenu> MenuKidsMenuList){
-		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < MenuKidsMenuList.size(); i++) {
-            resultList.add(MenuKidsMenuList.get(i).toHashMap());
-        }
-
-        return resultList;
+    public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		return menuServiceImpl.getAllMenu(requestBody);
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/kidsmenu/delete")
-    public List<HashMap<String,Object>> deleteMenuKidsMenu(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> deleteMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		
-		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
-		int id = Integer.parseInt(idStr);
-		menukidsmenuRepository.deleteObject(id);
-		return getAllMenuKidsMenu(vmjExchange);
+		return menuServiceImpl.deleteMenu(requestBody);
 	}
 
 	

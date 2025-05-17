@@ -12,6 +12,4 @@ public class MenuServiceImpl extends MenuServiceDecorator {
     public MenuServiceImpl (MenuServiceComponent record) {
         super(record);
     }
-
-    
 }
