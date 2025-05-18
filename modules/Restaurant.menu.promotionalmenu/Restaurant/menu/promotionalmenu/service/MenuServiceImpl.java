@@ -7,7 +7,7 @@ import vmj.routing.route.VMJExchange;
 import Restaurant.menu.core.*;
 
 import Restaurant.menu.core.MenuServiceDecorator;
-import Restaurant.menu.promotionalmenu.model.MenuImpl;
+import Restaurant.menu.promotionalmenu.MenuImpl;
 import Restaurant.menu.core.MenuServiceComponent;
 import Restaurant.menu.MenuFactory;
 

@@ -27,9 +27,6 @@ public class MenuImpl extends MenuComponent {
 		this.category = category;
 	}
 
-
-
-	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> menuMap = new HashMap<String,Object>();
 		menuMap.put("MenuId",getMenuId());

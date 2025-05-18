@@ -3,7 +3,7 @@
 	<feature automatic="selected" name="RestaurantServiceSystem"/>
 	<feature automatic="selected" name="Menu"/>
 	<feature name="SeasonalMenu"/>
-	<feature name="PromotionalMenu"/>
+	<feature manual="selected" name="PromotionalMenu"/>
 	<feature name="BeverageMenu"/>
 	<feature manual="selected" name="KidsMenu"/>
 	<feature name="SpicyMenu"/>

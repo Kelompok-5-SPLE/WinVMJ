@@ -1,5 +1,6 @@
 {
     "Menu":["Restaurant.menu.core"],
     "KidsMenu":["Restaurant.menu.kidsmenu"],
-    "TraditionalMenu":["Restaurant.menu.traditionalmenu"]
+    "TraditionalMenu":["Restaurant.menu.traditionalmenu"],
+    "PromotionalMenu":["Restaurant.menu.promotionalmenu"]
 }
