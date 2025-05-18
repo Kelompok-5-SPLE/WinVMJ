@@ -9,7 +9,7 @@ import Restaurant.menu.core.*;
 import Restaurant.menu.core.MenuResourceDecorator;
 import Restaurant.menu.core.MenuResourceComponent;
 import Restaurant.menu.core.MenuServiceComponent;
-import Restaurant.menu.promotionalmenu.model.MenuImpl;
+import Restaurant.menu.promotionalmenu.MenuImpl;
 import Restaurant.menu.promotionalmenu.MenuServiceImpl;
 
 import vmj.routing.route.exceptions.*;
