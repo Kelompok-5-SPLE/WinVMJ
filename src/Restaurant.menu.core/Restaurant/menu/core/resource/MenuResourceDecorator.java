@@ -5,38 +5,38 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
 public abstract class MenuResourceDecorator extends MenuResourceComponent{
-	protected MenuResourceComponent record;
+	protected MenuResourceComponent menuRepository;
 
-    public MenuResourceDecorator(MenuResourceComponent record) {
-        this.record = record;
+    public MenuResourceDecorator(MenuResourceComponent menuRepository) {
+        this.menuRepository = menuRepository;
     }
 
     public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		return record.saveMenu(vmjExchange);
+		return menuRepository.saveMenu(vmjExchange);
 	}
 
     public Menu createMenu(VMJExchange vmjExchange){
-		return record.createMenu(vmjExchange);
+		return menuRepository.createMenu(vmjExchange);
 	}
 
     public Menu createMenu(VMJExchange vmjExchange, int id){
-		return record.createMenu(vmjExchange, id);
+		return menuRepository.createMenu(vmjExchange, id);
 	}
 
     public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){
-		return record.updateMenu(vmjExchange);
+		return menuRepository.updateMenu(vmjExchange);
 	}
 
     public HashMap<String, Object> getMenu(VMJExchange vmjExchange){
-		return record.getMenu(vmjExchange);
+		return menuRepository.getMenu(vmjExchange);
 	}
 
     public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
-		return record.getAllMenu(vmjExchange);
+		return menuRepository.getAllMenu(vmjExchange);
 	}
 
     public List<HashMap<String,Object>> deleteMenu(VMJExchange vmjExchange){
-		return record.deleteMenu(vmjExchange);
+		return menuRepository.deleteMenu(vmjExchange);
 	}
 
 }
