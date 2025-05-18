@@ -16,31 +16,43 @@ import Restaurant.menu.core.MenuComponent;
 @Table(name="menu_kidsmenu")
 public class MenuImpl extends MenuDecorator {
 
-	public int AgeRestriction;
+	public int ageRestriction;
+
+	public MenuImpl(Menu baseMenu, int ageRestriction) {
+        // Copy properties from the base menu
+        this.MenuId = baseMenu.getMenuId();
+        this.name = baseMenu.getName();
+        this.description = baseMenu.getDescription();
+        this.price = baseMenu.getPrice();
+        this.category = baseMenu.getCategory();
+        // Set kids menu specific property
+        this.ageRestriction = ageRestriction;
+    }
+
 	public MenuImpl(){
         super();
         this.objectName = MenuImpl.class.getName();
     }
     
-    public MenuImpl(int AgeRestriction) {
+    public MenuImpl(int ageRestriction) {
     	super();
-		this.AgeRestriction = AgeRestriction;
+		this.ageRestriction = ageRestriction;
 		this.objectName = MenuImpl.class.getName();
     }
 	
-	public MenuImpl(MenuComponent record, int AgeRestriction) {
+	public MenuImpl(MenuComponent record, int ageRestriction) {
 		super(record);
-		this.AgeRestriction = AgeRestriction;
+		this.ageRestriction = ageRestriction;
 		this.objectName = MenuImpl.class.getName();
 	}
 
 	
 	public int getAgeRestriction() {
-		return AgeRestriction;
+		return ageRestriction;
 	}
 
 	public void setAgeRestriction(int ageRestriction) {
-		this.AgeRestriction = ageRestriction;
+		this.ageRestriction = ageRestriction;
 	}
 
 	public void setCategory(String category) {

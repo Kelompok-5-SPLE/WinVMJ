@@ -30,25 +30,12 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 	}
 
     public Menu createMenu(Map<String, Object> requestBody){
-		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("description");
-		String priceStr = (String) requestBody.get("price");
-		int price = Integer.parseInt(priceStr);
-		String category = (String) requestBody.get("category");
 		String ageResStr = (String) requestBody.get("ageRestriction");
 		int ageRestriction = Integer.parseInt(ageResStr);
-		
-		//to do: fix association attributes
-		Menu menu = MenuFactory.createMenu(
-			"Restaurant.menu.kidsmenu.MenuImpl",
-		name
-		, desc
-		, price
-		, category
-		, ageRestriction
-		);
-		this.menuRepository.saveObject(menu);
-		return menu;
+		Menu menu = record.createMenu(requestBody);
+		Menu menuKidsMenu = MenuFactory.createMenu("Restaurant.menu.kidsmenu.MenuImpl", menu, ageRestriction);
+		this.menuRepository.saveObject(menuKidsMenu);
+		return menuKidsMenu;
 	}
 
     public Menu createMenu(Map<String, Object> requestBody, int id){
