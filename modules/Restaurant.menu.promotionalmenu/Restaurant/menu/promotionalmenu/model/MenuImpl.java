@@ -16,30 +16,39 @@ import Restaurant.menu.core.MenuComponent;
 @Table(name="menu_promotionalmenu")
 public class MenuImpl extends MenuDecorator {
 
-	public int DiscountPercentage;
+	public int discountPercentage;
 	public MenuImpl() {
         super();
         this.objectName = MenuImpl.class.getName();
     }
+
+	public MenuImpl(Menu baseMenu, int discountPercentage) {
+		this.MenuId = baseMenu.getMenuId();
+		this.name = baseMenu.getName();
+		this.description = baseMenu.getDescription();
+		this.price = baseMenu.getPrice();
+		this.category = baseMenu.getCategory();
+		this.discountPercentage = discountPercentage;
+	}
     
-    public MenuImpl(int DiscountPercentage) {
+    public MenuImpl(int discountPercentage) {
     	super();
-		this.DiscountPercentage = DiscountPercentage;
+		this.discountPercentage = discountPercentage;
 		this.objectName = MenuImpl.class.getName();
     }
 	
-	public MenuImpl(MenuComponent record, int DiscountPercentage) {
+	public MenuImpl(MenuComponent record, int discountPercentage) {
 		super(record);
-		this.DiscountPercentage = DiscountPercentage;
+		this.discountPercentage = discountPercentage;
 		this.objectName = MenuImpl.class.getName();
 	}
 
 	public int getDiscountPercentage() {
-		return DiscountPercentage;
+		return discountPercentage;
 	}
 
 	public void setDiscountPercentage(int discountPercentage) {
-		this.DiscountPercentage = discountPercentage;
+		this.discountPercentage = discountPercentage;
 	}
 
 	public void setCategory(String category) {
