@@ -16,8 +16,7 @@ public abstract class MenuDecorator extends MenuComponent{
 
 	public MenuDecorator () {
 		super();
-		this.record = record;
-		this.MenuId =  MenuId.randomUUID();
+		this.MenuId =  UUID.randomUUID();
 	}
 		
 	public MenuDecorator (MenuComponent record) {
@@ -31,7 +30,7 @@ public abstract class MenuDecorator extends MenuComponent{
 	}
 	
 	public MenuDecorator (MenuComponent record, String objectName) {
-		this.MenuId =  MenuId.randomUUID();
+		this.MenuId =  UUID.randomUUID();
 		this.record = record;	
 		this.objectName=objectName;
 	}

@@ -17,6 +17,15 @@ import Restaurant.menu.core.MenuComponent;
 public class MenuImpl extends MenuDecorator {
 
 	public boolean isIced;
+	public MenuImpl(Menu baseMenu, boolean isIced) {
+        this.MenuId = baseMenu.getMenuId();
+        this.name = baseMenu.getName();
+        this.description = baseMenu.getDescription();
+        this.price = baseMenu.getPrice();
+        this.category = baseMenu.getCategory();
+        this.isIced = isIced;
+    }
+	
 	public MenuImpl(
         super();
         this.objectName = MenuImpl.class.getName();
@@ -34,6 +43,51 @@ public class MenuImpl extends MenuDecorator {
 		this.objectName = MenuImpl.class.getName();
 	}
 
+	public int getIsIced() {
+		return isIced;
+	}
 
+	public void setIsIced(int isIced) {
+		this.isIced = isIced;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCategory() {
+		return this.category;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public UUID getMenuId() {
+		return this.MenuId;
+	}
+
+	public void setMenuId(UUID MenuId) {
+		this.MenuId = MenuId;
+	}
 
 }
