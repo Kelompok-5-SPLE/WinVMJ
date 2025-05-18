@@ -73,18 +73,18 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 	}
 
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
-    List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
-    String idStr = ((String) requestBody.get("id"));
-    UUID id = UUID.fromString(idStr);
-    for (HashMap<String,Object> menu : menuList){
-        // Convert both to string and compare
-        String record_id_str = String.valueOf(((Double) menu.get("record_id")).intValue());
-        if (record_id_str.equals(idStr)){
-            return menu;
-        }
-    }
-    return null;
-}
+		List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
+		String idStr = ((String) requestBody.get("id"));
+		UUID id = UUID.fromString(idStr);
+		for (HashMap<String,Object> menu : menuList){
+			// Convert both to string and compare
+			String record_id_str = String.valueOf(((Double) menu.get("record_id")).intValue());
+			if (record_id_str.equals(idStr)){
+				return menu;
+			}
+		}
+		return null;
+	}
 
 	public HashMap<String, Object> getMenuById(int id){
 		Menu menu = this.menuRepository.getObject(id);
@@ -92,8 +92,17 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 	}
 
     public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("menu_impl");
-		List<Menu> List =this.menuRepository.getAllObject(table);
+		String table = "menu_comp";
+		
+		if (requestBody != null && requestBody.get("menu_impl") != null) {
+			table = (String) requestBody.get("menu_impl");
+		}
+		
+		if (table == null) {
+			table = "menu_comp"; 
+		}
+		
+		List<Menu> List = this.menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
 
