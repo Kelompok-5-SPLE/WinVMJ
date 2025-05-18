@@ -101,7 +101,7 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 	}
 
     public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("menu_impl");
+		String table = (String) requestBody.get("menu_promotionalmenu");
 		List<Menu> List =this.menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
