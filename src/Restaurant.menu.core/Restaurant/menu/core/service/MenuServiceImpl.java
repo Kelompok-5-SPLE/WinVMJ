@@ -107,7 +107,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("table_name");
+		String table = (String) requestBody.get("menu_impl");
 		List<Menu> List =this.menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
