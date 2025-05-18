@@ -35,14 +35,17 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		String priceStr = (String) requestBody.get("price");
 		int price = Integer.parseInt(priceStr);
 		String category = (String) requestBody.get("category");
+		String ageResStr = (String) requestBody.get("ageRestriction");
+		int ageRestriction = Integer.parseInt(ageResStr);
 		
 		//to do: fix association attributes
 		Menu menu = MenuFactory.createMenu(
-			"Restaurant.menu.core.MenuImpl",
+			"Restaurant.menu.kidsmenu.MenuImpl",
 		name
 		, desc
 		, price
 		, category
+		, ageRestriction
 		);
 		this.menuRepository.saveObject(menu);
 		return menu;
@@ -54,10 +57,12 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		String priceStr = (String) requestBody.get("price");
 		int price = Integer.parseInt(priceStr);
 		String category = (String) requestBody.get("category");
+		String ageResStr = (String) requestBody.get("ageRestriction");
+		int ageRestriction = Integer.parseInt(ageResStr);
 		
 		//to do: fix association attributes
 		
-		Menu menu = MenuFactory.createMenu("Restaurant.menu.core.MenuImpl", name, desc, price, category);
+		Menu menu = MenuFactory.createMenu("Restaurant.menu.kidsmenu.MenuImpl", name, desc, price, category, ageRestriction);
 		return menu;
 	}
 

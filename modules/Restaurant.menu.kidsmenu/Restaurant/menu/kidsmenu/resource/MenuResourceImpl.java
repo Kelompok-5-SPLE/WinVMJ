@@ -24,15 +24,28 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 		this.menuServiceImpl = new MenuServiceImpl(recordService);
     }
 
+	// @Restriced(permission = "")
+    @Route(url="call/kidsmenu")
+	public HashMap<String,Object> menu(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody);
+			return result.toHashMap();
+		}
+		throw new NotFoundException("Route tidak ditemukan");
+	}
+
+
     // @Restriced(permission = "")
     @Route(url="call/kidsmenu/save")
     public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody);
+			return List.of(result.toHashMap());
+
 		}
-        String email =  vmjExchange.getAuthPayload().getEmail();
-		List<HashMap<String,Object>> menu = menuServiceImpl.saveMenu(vmjExchange);
-		return menu;
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
     public Menu createMenu(VMJExchange vmjExchange){
