@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 @Entity(name="menu_impl")
 @Table(name="menu_impl")
 public class MenuImpl extends MenuComponent {
-	
-	public MenuImpl() {}
 
 	public MenuImpl(String name, String description, int price, String category) {
 		this.MenuId =  UUID.randomUUID();
@@ -28,6 +26,10 @@ public class MenuImpl extends MenuComponent {
 		this.price = price;
 		this.category = category;
 	}
+	
+	public MenuImpl() {}
+
+	
 
 	
 	public HashMap<String, Object> toHashMap() {

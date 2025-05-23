@@ -26,43 +26,11 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 
 	// @Restriced(permission = "")
     @Route(url="call/kidsmenu")
-	public HashMap<String,Object> menu(VMJExchange vmjExchange){
+	public HashMap<String,Object> createMenu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody);
 			return result.toHashMap();
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-
-    // @Restriced(permission = "")
-    @Route(url="call/kidsmenu/save")
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody);
-			return List.of(result.toHashMap());
-
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-    public Menu createMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody);
-			return result;
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-
-    public Menu createMenu(VMJExchange vmjExchange, int id){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody, id);
-			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}

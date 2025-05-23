@@ -1,6 +1,7 @@
 package Restaurant.menu.kidsmenu;
 
 import java.util.*;
+
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
@@ -18,33 +19,20 @@ public class MenuImpl extends MenuDecorator {
 
 	public int ageRestriction;
 
-	public MenuImpl(Menu baseMenu, int ageRestriction) {
-        // Copy properties from the base menu
-        this.MenuId = baseMenu.getMenuId();
-        this.name = baseMenu.getName();
-        this.description = baseMenu.getDescription();
-        this.price = baseMenu.getPrice();
-        this.category = baseMenu.getCategory();
-        // Set kids menu specific property
-        this.ageRestriction = ageRestriction;
-    }
+	public MenuImpl(MenuComponent record, int ageRestriction) {
+		super(record);
+		this.ageRestriction = ageRestriction;
+	}
+	
 
 	public MenuImpl(){
         super();
-        this.objectName = MenuImpl.class.getName();
     }
     
     public MenuImpl(int ageRestriction) {
     	super();
 		this.ageRestriction = ageRestriction;
-		this.objectName = MenuImpl.class.getName();
     }
-	
-	public MenuImpl(MenuComponent record, int ageRestriction) {
-		super(record);
-		this.ageRestriction = ageRestriction;
-		this.objectName = MenuImpl.class.getName();
-	}
 
 	
 	public int getAgeRestriction() {
@@ -92,5 +80,13 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setMenuId(UUID MenuId) {
 		this.MenuId = MenuId;
+	}
+
+	@Override
+	public HashMap<String, Object> toHashMap() {
+		HashMap<String, Object> menuMap = super.toHashMap();
+		menuMap.put("kidsMenuId", getMenuId());
+		menuMap.put("ageRestriction", getAgeRestriction());
+		return menuMap;
 	}
 }

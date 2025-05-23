@@ -34,15 +34,6 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Menu createMenu(VMJExchange vmjExchange, int id){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody, id);
-			return result;
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
 	// @Restriced(permission = "")
     @Route(url="call/menu/update")
     public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){

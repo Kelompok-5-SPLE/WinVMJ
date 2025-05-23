@@ -12,7 +12,7 @@ public abstract class MenuServiceComponent implements MenuService{
         this.menuRepository = new RepositoryUtil<Menu>(Restaurant.menu.core.MenuComponent.class);
     }	
 
-    public abstract Menu createMenu(Map<String, Object> requestBodye);
+    public abstract Menu createMenu(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> updateMenu(Map<String, Object> requestBody);
     public abstract HashMap<String, Object> getMenu(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody);

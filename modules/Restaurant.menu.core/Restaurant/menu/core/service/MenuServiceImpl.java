@@ -40,19 +40,6 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		return menu;
 	}
 
-    public Menu createMenu(Map<String, Object> requestBody, int id){
-		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("description");
-		String priceStr = (String) requestBody.get("price");
-		int price = Integer.parseInt(priceStr);
-		String category = (String) requestBody.get("category");
-		
-		//to do: fix association attributes
-		
-		Menu menu = MenuFactory.createMenu("Restaurant.menu.core.MenuImpl", name, desc, price, category);
-		return menu;
-	}
-
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("menuId");
 		
@@ -114,9 +101,5 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		this.menuRepository.deleteObject(menuId);
 		return getAllMenu(requestBody);
 	}
-
-	public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){
-		return null;
-	}  
 
 }

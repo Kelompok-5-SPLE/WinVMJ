@@ -2,6 +2,7 @@ package Restaurant.menu;
 
 import Restaurant.menu.core.Menu;
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class MenuFactory{
@@ -16,15 +17,21 @@ public class MenuFactory{
     {
         Menu record = null;
         try {
+            System.out.println(Arrays.toString(base));
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];
+            System.out.println("Constructor: " + constructor);
+
             record = (Menu) constructor.newInstance(base);
+          
         } 
         catch (IllegalArgumentException e)
         {
             LOGGER.severe("Failed to create instance of Menu.");
             LOGGER.severe("Given FQN: " + fullyQualifiedName);
             LOGGER.severe("Failed to run: Check your constructor argument");
+            LOGGER.severe("Constructor: " + e.getMessage());
+            LOGGER.severe("Constructor: " + Arrays.toString(e.getStackTrace()));
             System.exit(20);
         }
         catch (ClassCastException e)

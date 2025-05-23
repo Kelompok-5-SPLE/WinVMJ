@@ -25,6 +25,7 @@ public class MenuServiceFactory{
             LOGGER.severe("Failed to create instance of Menu.");
             LOGGER.severe("Given FQN: " + fullyQualifiedName);
             LOGGER.severe("Failed to run: Check your constructor argument");
+            
             System.exit(20);
         }
         catch (ClassCastException e)

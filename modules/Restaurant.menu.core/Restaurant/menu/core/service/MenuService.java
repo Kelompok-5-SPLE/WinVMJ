@@ -5,7 +5,6 @@ import vmj.routing.route.VMJExchange;
 
 public interface MenuService {
 	Menu createMenu(Map<String, Object> requestBody);
-	Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response);
 	HashMap<String, Object> getMenu(Map<String, Object> requestBody);
     HashMap<String, Object> updateMenu(Map<String, Object> requestBody);
     HashMap<String, Object> getMenuById(UUID id);

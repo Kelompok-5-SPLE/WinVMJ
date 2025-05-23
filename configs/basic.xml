@@ -5,7 +5,7 @@
 	<feature name="SeasonalMenu"/>
 	<feature name="PromotionalMenu"/>
 	<feature name="BeverageMenu"/>
-	<feature name="KidsMenu"/>
+	<feature manual="selected" name="KidsMenu"/>
 	<feature name="SpicyMenu"/>
 	<feature name="TraditionalMenu"/>
 </configuration>
