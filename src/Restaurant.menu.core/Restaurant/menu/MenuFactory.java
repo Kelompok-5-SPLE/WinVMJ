@@ -17,10 +17,8 @@ public class MenuFactory{
     {
         Menu record = null;
         try {
-            System.out.println(Arrays.toString(base));
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];
-            System.out.println("Constructor: " + constructor);
 
             record = (Menu) constructor.newInstance(base);
           
