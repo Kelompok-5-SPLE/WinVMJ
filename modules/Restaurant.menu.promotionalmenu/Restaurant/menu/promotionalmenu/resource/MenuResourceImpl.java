@@ -4,104 +4,66 @@ import java.util.*;
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
-import Restaurant.menu.core.MenuResourceDecorator;
-import Restaurant.menu.core.MenuImpl;
-import Restaurant.menu.core.MenuResourceComponent;
+import Restaurant.menu.MenuFactory;
+
+import vmj.routing.route.exceptions.*;
+
+import Restaurant.menu.core.*;
+import Restaurant.menu.promotionalmenu.MenuImpl;
+import Restaurant.menu.promotionalmenu.MenuServiceImpl;
+
 
 public class MenuResourceImpl extends MenuResourceDecorator {
-    public MenuResourceImpl (MenuResourceComponent record) {
-        super(record);
+	private MenuServiceImpl menuServiceImpl;
+
+	public MenuResourceImpl (MenuResourceComponent recordResource, MenuServiceComponent recordService) {
+        super(recordResource);
+		this.menuServiceImpl = new MenuServiceImpl(recordService);
     }
 
-    // @Restriced(permission = "")
-    @Route(url="call/promotionalmenu/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
+	// @Restriced(permission = "")
+    @Route(url="call/promotionalmenu")
+	public HashMap<String,Object> createMenu(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Menu result = menuServiceImpl.createMenu(requestBody);
+			return result.toHashMap();
 		}
-		MenuPromotionalMenu menupromotionalmenu = createMenuPromotionalMenu(vmjExchange);
-		menupromotionalmenuRepository.saveObject(menupromotionalmenu);
-		return getAllMenuPromotionalMenu(vmjExchange);
-	}
-
-    public Menu createMenuPromotionalMenu(VMJExchange vmjExchange){
-		String DiscountPercentageStr = (String) vmjExchange.getRequestBodyForm("DiscountPercentage");
-		int DiscountPercentage = Integer.parseInt(DiscountPercentageStr);
-		
-		MenuPromotionalMenu menupromotionalmenu = record.createMenuPromotionalMenu(vmjExchange);
-		MenuPromotionalMenu menupromotionalmenudeco = MenuPromotionalMenuFactory.createMenuPromotionalMenu("Restaurant.promotionalmenu.core.MenuImpl", menupromotionalmenu, MenuId, name, description, price, category
-		DiscountPercentage
-		);
-			return menupromotionalmenudeco;
-	}
-
-
-    public Menu createMenuPromotionalMenu(VMJExchange vmjExchange, int id){
-		String DiscountPercentageStr = (String) vmjExchange.getRequestBodyForm("DiscountPercentage");
-		int DiscountPercentage = Integer.parseInt(DiscountPercentageStr);
-		MenuPromotionalMenu menupromotionalmenu = menupromotionalmenuRepository.getObject(id);
-		int recordMenuPromotionalMenuId = (((MenuPromotionalMenuDecorator) savedMenuPromotionalMenu.getRecord()).getId();
-		
-		MenuPromotionalMenu menupromotionalmenu = record.createMenuPromotionalMenu(vmjExchange);
-		MenuPromotionalMenu menupromotionalmenudeco = MenuPromotionalMenuFactory.createMenuPromotionalMenu("Restaurant.promotionalmenu.core.MenuImpl", id, menupromotionalmenu, MenuId, name, description, price, category
-		DiscountPercentage
-		);
-			return menupromotionalmenudeco;
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/promotionalmenu/update")
-    public HashMap<String, Object> updateMenuPromotionalMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+    public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")){
 			return null;
 		}
-		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
-		int id = Integer.parseInt(idStr);
-		
-		MenuPromotionalMenu menupromotionalmenu = menupromotionalmenuRepository.getObject(id);
-		menupromotionalmenu = createMenuPromotionalMenu(vmjExchange, id);
-		
-		menupromotionalmenuRepository.updateObject(menupromotionalmenu);
-		menupromotionalmenu = menupromotionalmenuRepository.getObject(id);
-		//to do: fix association attributes
-		
-		return menupromotionalmenu.toHashMap();
+		return menuServiceImpl.updateMenu(requestBody);
 		
 	}
 
-	// @Restriced(permission = "")
+    // @Restriced(permission = "")
     @Route(url="call/promotionalmenu/detail")
-    public HashMap<String, Object> getMenuPromotionalMenu(VMJExchange vmjExchange){
-		return record.getMenuPromotionalMenu(vmjExchange);
-	}
+    public HashMap<String, Object> getMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		return menuServiceImpl.getMenu(requestBody);	}
 
 	// @Restriced(permission = "")
     @Route(url="call/promotionalmenu/list")
-    public List<HashMap<String,Object>> getAllMenuPromotionalMenu(VMJExchange vmjExchange){
-		List<MenuPromotionalMenu> menupromotionalmenuList = menupromotionalmenuRepository.getAllObject("menupromotionalmenu_impl");
-		return transformMenuPromotionalMenuListToHashMap(menupromotionalmenuList);
-	}
-
-    public List<HashMap<String,Object>> transformMenuPromotionalMenuListToHashMap(List<MenuPromotionalMenu> MenuPromotionalMenuList){
-		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < MenuPromotionalMenuList.size(); i++) {
-            resultList.add(MenuPromotionalMenuList.get(i).toHashMap());
-        }
-
-        return resultList;
+    public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		return menuServiceImpl.getAllMenu(requestBody);
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/promotionalmenu/delete")
-    public List<HashMap<String,Object>> deleteMenuPromotionalMenu(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> deleteMenu(VMJExchange vmjExchange){
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		
-		String idStr = (String) vmjExchange.getRequestBodyForm("MenuId");
-		int id = Integer.parseInt(idStr);
-		menupromotionalmenuRepository.deleteObject(id);
-		return getAllMenuPromotionalMenu(vmjExchange);
+		return menuServiceImpl.deleteMenu(requestBody);
 	}
 
 	

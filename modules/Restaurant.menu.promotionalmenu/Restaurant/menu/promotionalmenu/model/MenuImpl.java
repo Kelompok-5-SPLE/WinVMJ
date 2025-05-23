@@ -16,24 +16,80 @@ import Restaurant.menu.core.MenuComponent;
 @Table(name="menu_promotionalmenu")
 public class MenuImpl extends MenuDecorator {
 
-	public int DiscountPercentage;
-	public MenuImpl(
-        super();
-        this.objectName = MenuImpl.class.getName();
+	public int discountPercentage;
+	public MenuImpl(MenuComponent record, int discountPercentage) {
+        super(record);
+        this.discountPercentage = discountPercentage;
     }
+
+	public MenuImpl(){
+		super();
+	}
     
-    public MenuImpl(int DiscountPercentage) {
+    public MenuImpl(int discountPercentage) {
     	super();
-		this.DiscountPercentage = DiscountPercentage;
-		this.objectName = MenuImpl.class.getName();
+		this.DiscountPercentage = discountPercentage;
     }
 	
-	public MenuImpl(MenuComponent record, int DiscountPercentage) {
-		super(record);
-		this.DiscountPercentage = DiscountPercentage;
-		this.objectName = MenuImpl.class.getName();
+	public int getDiscountPercentage() {
+		return discountPercentage;
 	}
 
+	public void setDiscountPercentage(int discountPercentage) {
+		this.discountPercentage = discountPercentage;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+		this.record.setCategory(category);
+	}
+
+	public String getCategory() {
+		return this.category;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+		this.record.setPrice(price);
+		
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+		this.record.setDescription(description);
+	}
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+		this.record.setName(name);
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public UUID getMenuId() {
+		return this.MenuId;
+	}
+
+	public void setMenuId(UUID MenuId) {
+		this.MenuId = MenuId;
+	}
+
+	@Override
+	public HashMap<String, Object> toHashMap() {
+		HashMap<String, Object> menuMap = super.toHashMap();
+		menuMap.put("promotionalMenuId", getMenuId());
+		menuMap.put("discountPercetage", getDiscountPercentage());
+		return menuMap;
+	}
 
 
 }

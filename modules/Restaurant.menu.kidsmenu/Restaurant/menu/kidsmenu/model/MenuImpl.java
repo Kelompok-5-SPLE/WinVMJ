@@ -91,7 +91,7 @@ public class MenuImpl extends MenuDecorator {
 	@Override
 	public HashMap<String, Object> toHashMap() {
 		HashMap<String, Object> menuMap = super.toHashMap();
-		menuMap.put("kidsMenuId", getMenuId());
+		menuMap.put("promotionalMenuId", getMenuId());
 		menuMap.put("ageRestriction", getAgeRestriction());
 		return menuMap;
 	}
