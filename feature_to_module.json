@@ -2,5 +2,7 @@
     "Menu":["Restaurant.menu.core"],
     "KidsMenu":["Restaurant.menu.core","Restaurant.menu.kidsmenu"],
     "PromotionalMenu":["Restaurant.menu.core","Restaurant.menu.promotionalmenu"],
-    "TraditionalMenu":["Restaurant.menu.core","Restaurant.menu.traditionalmenu"]
+    "TraditionalMenu":["Restaurant.menu.core","Restaurant.menu.traditionalmenu"],
+    "BeverageMenu":["Restaurant.menu.core","Restaurant.menu.beveragemenu"],
+    "SpicyMenu":["Restaurant.menu.core","Restaurant.menu.spicymenu"]
 }
