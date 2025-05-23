@@ -1,0 +1,10 @@
+# Ignore compiled class files and binaries
+/bin/
+/bin-comp/
+
+# Ignore generated sources
+/src-gen/
+/modules-gen/
+
+# If you meant to ignore only generated files, keep /src/
+# DO NOT ignore /src/ if it contains your actual source code

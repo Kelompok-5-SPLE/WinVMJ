@@ -1,4 +1,4 @@
-package Restaurant.menu.tradtionalmenu;
+package Restaurant.menu.traditionalmenu;
 
 import java.util.*;
 
@@ -17,9 +17,9 @@ public class MenuServiceImpl extends MenuServiceDecorator {
     public Menu createMenu(Map<String, Object> requestBody){
 		String origin = (String) requestBody.get("origin");
 		Menu menu = record.createMenu(requestBody);
-		Menu menutradtionalmenu = MenuFactory.createMenu("Restaurant.menu.tradtionalmenu.MenuImpl", menu, origin);
-		menuRepository.saveObject(menutradtionalmenu);
-		return menutradtionalmenu;
+		Menu menutraditionalmenu = MenuFactory.createMenu("Restaurant.menu.traditionalmenu.MenuImpl", menu, origin);
+		menuRepository.saveObject(menutraditionalmenu);
+		return menutraditionalmenu;
 	}
 
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
@@ -81,8 +81,8 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		String baseMenuIdStr = (String) requestBody.get("baseMenuId");
 		UUID menuId = UUID.fromString(idStr);
 
-	    Menu tradtionalmenu = this.menuRepository.getObject(menuId);
-	    MenuImpl menuImpl = (MenuImpl)tradtionalmenu;
+	    Menu traditionalmenu = this.menuRepository.getObject(menuId);
+	    MenuImpl menuImpl = (MenuImpl)traditionalmenu;
 
     	UUID baseMenuId = UUID.fromString(baseMenuIdStr);
 

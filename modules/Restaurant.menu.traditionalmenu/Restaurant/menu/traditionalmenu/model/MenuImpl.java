@@ -19,7 +19,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public String origin;
 
-	public MenuImpl(MenuComponent record, int origin) {
+	public MenuImpl(MenuComponent record, String origin) {
 		super(record);
 		this.origin = origin;
 	}
@@ -92,7 +92,7 @@ public class MenuImpl extends MenuDecorator {
 	public HashMap<String, Object> toHashMap() {
 		HashMap<String, Object> menuMap = super.toHashMap();
 		menuMap.put("traditionalmenuId", getMenuId());
-		menuMap.put("origin", getorigin());
+		menuMap.put("origin", getOrigin());
 		return menuMap;
 	}
 }
