@@ -35,7 +35,7 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		menu.setPrice(Integer.parseInt(priceStr));
 		menu.setCategory((String) requestBody.get("category"));
 		String ageResStr = (String) requestBody.get("ageRestriction");
-		menu.setAgeRestriction(Integer.parseInt(ageResStr));
+		((MenuImpl) menu).setAgeRestriction(Integer.parseInt(ageResStr));
 		
 		
 		menuRepository.updateObject(menu);

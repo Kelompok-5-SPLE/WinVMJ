@@ -32,6 +32,7 @@ public class MenuImpl extends MenuDecorator {
     public MenuImpl(int ageRestriction) {
     	super();
 		this.ageRestriction = ageRestriction;
+
     }
 
 	
@@ -45,6 +46,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setCategory(String category) {
 		this.category = category;
+		this.record.setCategory(category);
 	}
 
 	public String getCategory() {
@@ -53,6 +55,8 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setPrice(int price) {
 		this.price = price;
+		this.record.setPrice(price);
+		
 	}
 
 	public int getPrice() {
@@ -61,6 +65,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setDescription(String description) {
 		this.description = description;
+		this.record.setDescription(description);
 	}
 	public String getDescription() {
 		return this.description;
@@ -68,6 +73,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setName(String name) {
 		this.name = name;
+		this.record.setName(name);
 	}
 
 	public String getName() {
