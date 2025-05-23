@@ -20,7 +20,6 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		Menu menu = record.createMenu(requestBody);
 		Menu menuKidsMenu = MenuFactory.createMenu("Restaurant.menu.kidsmenu.MenuImpl", menu, ageRestriction);
 		menuRepository.saveObject(menuKidsMenu);
-		System.out.println(menuKidsMenu.toHashMap());
 		return menuKidsMenu;
 	}
 
@@ -80,8 +79,17 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 
     public List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody){
 		String idStr = ((String) requestBody.get("menuId"));
+		String baseMenuIdStr = (String) requestBody.get("baseMenuId");
 		UUID menuId = UUID.fromString(idStr);
+
+	    Menu kidsMenu = this.menuRepository.getObject(menuId);
+	    MenuImpl menuImpl = (MenuImpl)kidsMenu;
+
+    	UUID baseMenuId = UUID.fromString(baseMenuIdStr);
+
 		menuRepository.deleteObject(menuId);
+		menuRepository.deleteObject(baseMenuId);
+
 		return getAllMenu(requestBody);
 	}
     
