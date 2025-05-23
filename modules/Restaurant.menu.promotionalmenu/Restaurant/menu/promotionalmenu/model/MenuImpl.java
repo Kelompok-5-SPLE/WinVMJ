@@ -28,7 +28,7 @@ public class MenuImpl extends MenuDecorator {
     
     public MenuImpl(int discountPercentage) {
     	super();
-		this.DiscountPercentage = discountPercentage;
+		this.discountPercentage = discountPercentage;
     }
 	
 	public int getDiscountPercentage() {

@@ -14,9 +14,10 @@ public class MenuServiceImpl extends MenuServiceDecorator {
     }
 
 	public Menu createMenu(Map<String, Object> requestBody){
-		int discountPercentage = (String) requestBody.get("discountPercentage");
+		String discountPercentage = (String) requestBody.get("discountPercentage");
+		int discountPercentageInt = Integer.parseInt(discountPercentage);
 		Menu menu = record.createMenu(requestBody);
-		Menu menuPromotionalMenu = MenuFactory.createMenu("Restaurant.menu.promotionalmenu.MenuImpl", menu, discountPercentage);
+		Menu menuPromotionalMenu = MenuFactory.createMenu("Restaurant.menu.promotionalmenu.MenuImpl", menu, discountPercentageInt);
 		menuRepository.saveObject(menuPromotionalMenu);
 		System.out.println(menuPromotionalMenu.toHashMap());
 		return menuPromotionalMenu;

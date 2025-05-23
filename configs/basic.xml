@@ -3,9 +3,9 @@
 	<feature automatic="selected" name="RestaurantServiceSystem"/>
 	<feature automatic="selected" name="Menu"/>
 	<feature name="SeasonalMenu"/>
-	<feature name="PromotionalMenu"/>
+	<feature manual="selected" name="PromotionalMenu"/>
 	<feature name="BeverageMenu"/>
-	<feature name="KidsMenu"/>
+	<feature manual="selected" name="KidsMenu"/>
 	<feature name="SpicyMenu"/>
 	<feature manual="selected" name="TraditionalMenu"/>
 </configuration>
