@@ -11,16 +11,8 @@ public abstract class MenuResourceDecorator extends MenuResourceComponent{
         this.menuRepository = menuRepository;
     }
 
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		return menuRepository.saveMenu(vmjExchange);
-	}
-
-    public Menu createMenu(VMJExchange vmjExchange){
+    public HashMap<String,Object> createMenu(VMJExchange vmjExchange){
 		return menuRepository.createMenu(vmjExchange);
-	}
-
-    public Menu createMenu(VMJExchange vmjExchange, int id){
-		return menuRepository.createMenu(vmjExchange, id);
 	}
 
     public HashMap<String, Object> updateMenu(VMJExchange vmjExchange){

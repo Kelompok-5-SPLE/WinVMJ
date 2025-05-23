@@ -1,5 +1,6 @@
 package Restaurant.menu.core;
 import java.util.*;
+
 import com.google.gson.Gson;
 import java.util.*;
 import java.util.logging.Logger;
@@ -19,22 +20,6 @@ import Restaurant.menu.MenuFactory;
 //add other required packages
 
 public class MenuServiceImpl extends MenuServiceComponent{
-
-	public List<HashMap<String,Object>> saveMenu(Map<String, Object> requestBody){
-		return null;
-	}
-
-
-
-	@Override
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange) {
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
-		}
-		Menu menu = createMenu(vmjExchange.getPayload());
-		this.menuRepository.saveObject(menu);
-		return getAllMenu(vmjExchange.getPayload());
-	}
 
     public Menu createMenu(Map<String, Object> requestBody){
 		String name = (String) requestBody.get("name");
@@ -69,9 +54,10 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("MenuId");
-		int id = Integer.parseInt(idStr);
-		Menu menu =this.menuRepository.getObject(id);
+		String idStr = (String) requestBody.get("menuId");
+		
+		UUID menuId = UUID.fromString(idStr);
+		Menu menu = this.menuRepository.getObject(menuId);
 		
 		menu.setName((String) requestBody.get("name"));
 		menu.setDescription((String) requestBody.get("description"));
@@ -88,20 +74,21 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
-    List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
-    String idStr = ((String) requestBody.get("id"));
-    UUID id = UUID.fromString(idStr);
-    for (HashMap<String,Object> menu : menuList){
-        // Convert both to string and compare
-        String record_id_str = String.valueOf(((Double) menu.get("record_id")).intValue());
-        if (record_id_str.equals(idStr)){
-            return menu;
-        }
+    String idStr = ((String) requestBody.get("menuId"));
+    
+    UUID menuId = UUID.fromString(idStr);    
+    try {
+    	
+    	HashMap<String, Object> menu = getMenuById(menuId);
+    	return menu;
     }
-    return null;
+    
+    catch(Exception e){
+    	return null;
+    }
 }
 
-	public HashMap<String, Object> getMenuById(int id){
+	public HashMap<String, Object> getMenuById(UUID id){
 		Menu menu = this.menuRepository.getObject(id);
 		return menu.toHashMap();
 	}
@@ -122,22 +109,10 @@ public class MenuServiceImpl extends MenuServiceComponent{
 	}
 
     public List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get("id"));
-		int id = Integer.parseInt(idStr);
-		this.menuRepository.deleteObject(id);
+		String idStr = ((String) requestBody.get("menuId"));
+		UUID menuId = UUID.fromString(idStr);
+		this.menuRepository.deleteObject(menuId);
 		return getAllMenu(requestBody);
-	}
-
-	public void createMenu() {
-		// TODO: implement this method
-	}
-
-	public void deleteMenu() {
-		// TODO: implement this method
-	}
-
-	public void getPrice() {
-		// TODO: implement this method
 	}
 
 	public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){

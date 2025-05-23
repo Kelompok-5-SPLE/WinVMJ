@@ -14,20 +14,12 @@ public abstract class MenuServiceDecorator extends MenuServiceComponent{
 		return record.createMenu(requestBody);
 	}
 
-    public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){
-		return record.createMenu(requestBody, response);
-	}
-
 	public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
 		return record.getMenu(requestBody);
 	}
 
 	public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
 		return record.getAllMenu(requestBody);
-	}
-
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		return record.saveMenu(vmjExchange);
 	}
 
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
@@ -42,16 +34,7 @@ public abstract class MenuServiceDecorator extends MenuServiceComponent{
 		return record.deleteMenu(requestBody);
 	}
 
-	public HashMap<String, Object> getMenuById(int id){
+	public HashMap<String, Object> getMenuById(UUID id){
         return record.getMenuById(id);
     }
-
-	public void createMenu() {
-	}
-
-	public void deleteMenu() {
-	}
-
-	public void getPrice() {
-	}
 }

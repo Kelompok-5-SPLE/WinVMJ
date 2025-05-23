@@ -13,11 +13,6 @@ public class MenuResourceImpl extends MenuResourceComponent{
 	
 	private MenuServiceImpl menuServiceImpl = new MenuServiceImpl();
 
-	// @Restriced(permission = "")
-    @Route(url="call/menu/save")
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		return null;
-	}
 
 	// @Restriced(permission = "")
     @Route(url="call/menu")
@@ -30,11 +25,11 @@ public class MenuResourceImpl extends MenuResourceComponent{
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Menu createMenu(VMJExchange vmjExchange){
+    public HashMap<String,Object> createMenu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody);
-			return result;
+			return result.toHashMap();
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}
