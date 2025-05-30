@@ -18,8 +18,8 @@ public abstract class MenuServiceDecorator extends MenuServiceComponent{
 		return record.getMenu(requestBody);
 	}
 
-	public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		return record.getAllMenu(requestBody);
+	public List<HashMap<String,Object>> getAllMenu(){
+		return record.getAllMenu();
 	}
 
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){

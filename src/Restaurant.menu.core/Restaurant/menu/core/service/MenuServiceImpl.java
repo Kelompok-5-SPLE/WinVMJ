@@ -80,8 +80,8 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		return menu.toHashMap();
 	}
 
-    public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("table_name");
+    public List<HashMap<String,Object>> getAllMenu(){
+		String table = "menu_impl";
 		List<Menu> List =this.menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
@@ -99,7 +99,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		String idStr = ((String) requestBody.get("menuId"));
 		UUID menuId = UUID.fromString(idStr);
 		this.menuRepository.deleteObject(menuId);
-		return getAllMenu(requestBody);
+		return getAllMenu();
 	}
 
 }

@@ -61,8 +61,8 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		return menu.toHashMap();
 	}
 
-    public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("table_name");
+    public List<HashMap<String,Object>> getAllMenu(){
+		String table = "menu_traditionalmenu";
 		List<Menu> List = menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
@@ -89,7 +89,7 @@ public class MenuServiceImpl extends MenuServiceDecorator {
 		menuRepository.deleteObject(menuId);
 		menuRepository.deleteObject(baseMenuId);
 
-		return getAllMenu(requestBody);
+		return getAllMenu();
 	}
     
 }

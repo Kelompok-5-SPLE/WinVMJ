@@ -52,8 +52,7 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 	// @Restriced(permission = "")
     @Route(url="call/promotionalmenu/list")
     public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload(); 
-		return menuServiceImpl.getAllMenu(requestBody);
+		return menuServiceImpl.getAllMenu();
 	}
 
 	// @Restriced(permission = "")

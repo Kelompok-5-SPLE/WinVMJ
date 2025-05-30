@@ -55,8 +55,7 @@ public class MenuResourceImpl extends MenuResourceComponent{
 	// @Restriced(permission = "")
     @Route(url="call/menu/list")
     public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload(); 
-		return menuServiceImpl.getAllMenu(requestBody);
+		return menuServiceImpl.getAllMenu();
 	}
 
 	// @Restriced(permission = "")

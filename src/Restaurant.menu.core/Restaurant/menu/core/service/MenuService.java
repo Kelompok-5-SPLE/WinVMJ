@@ -8,7 +8,7 @@ public interface MenuService {
 	HashMap<String, Object> getMenu(Map<String, Object> requestBody);
     HashMap<String, Object> updateMenu(Map<String, Object> requestBody);
     HashMap<String, Object> getMenuById(UUID id);
-    List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody);
+    List<HashMap<String,Object>> getAllMenu();
     List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody);
 	List<HashMap<String, Object>> transformListToHashMap(List<Menu> List);
 }

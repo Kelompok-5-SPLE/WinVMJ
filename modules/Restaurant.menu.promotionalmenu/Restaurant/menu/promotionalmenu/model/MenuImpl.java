@@ -87,7 +87,7 @@ public class MenuImpl extends MenuDecorator {
 	public HashMap<String, Object> toHashMap() {
 		HashMap<String, Object> menuMap = super.toHashMap();
 		menuMap.put("promotionalMenuId", getMenuId());
-		menuMap.put("discountPercetage", getDiscountPercentage());
+		menuMap.put("discountPercentage", getDiscountPercentage());
 		return menuMap;
 	}
 

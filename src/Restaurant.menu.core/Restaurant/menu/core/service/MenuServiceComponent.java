@@ -15,7 +15,7 @@ public abstract class MenuServiceComponent implements MenuService{
     public abstract Menu createMenu(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> updateMenu(Map<String, Object> requestBody);
     public abstract HashMap<String, Object> getMenu(Map<String, Object> requestBody);
-    public abstract List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody);
+    public abstract List<HashMap<String,Object>> getAllMenu();
     public abstract List<HashMap<String,Object>> transformListToHashMap(List<Menu> List);
     public abstract List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getMenuById(UUID id);
