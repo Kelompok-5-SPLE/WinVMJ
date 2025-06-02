@@ -2,6 +2,7 @@ package Restaurant.menu;
 
 import Restaurant.menu.core.Menu;
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class MenuFactory{
@@ -12,41 +13,45 @@ public class MenuFactory{
 
     }
 
-    public static Menu createMenu(String fullyQualifiedName, Object ... base)
-    {
-        Menu record = null;
-        try {
-            Class<?> clz = Class.forName(fullyQualifiedName);
-            Constructor<?> constructor = clz.getDeclaredConstructors()[0];
-            record = (Menu) constructor.newInstance(base);
-        } 
-        catch (IllegalArgumentException e)
-        {
-            LOGGER.severe("Failed to create instance of Menu.");
-            LOGGER.severe("Given FQN: " + fullyQualifiedName);
-            LOGGER.severe("Failed to run: Check your constructor argument");
-            System.exit(20);
+    public static Menu createMenu(String fqn, Object... args) {
+        Class<?> clz = Class.forName(fqn);
+        Class<?>[] actualTypes = Arrays.stream(args)
+                                       .map(a -> a == null ? Object.class : a.getClass())
+                                       .toArray(Class<?>[]::new);
+
+        for (Constructor<?> ctor : clz.getDeclaredConstructors()) {
+            Class<?>[] formal = ctor.getParameterTypes();
+            if (formal.length != actualTypes.length) continue;
+
+            boolean ok = true;
+            for (int i = 0; i < formal.length; i++) {
+                if (!wrap(formal[i]).isAssignableFrom(wrap(actualTypes[i]))) {
+                    ok = false; break;
+                }
+            }
+            if (ok) {
+                ctor.setAccessible(true);
+                return (Menu) ctor.newInstance(args);
+            }
         }
-        catch (ClassCastException e)
-        {   LOGGER.severe("Failed to create instance of Menu.");
-            LOGGER.severe("Given FQN: " + fullyQualifiedName);
-            LOGGER.severe("Failed to cast the object");
-            System.exit(30);
-        }
-        catch (ClassNotFoundException e)
-        {
-            LOGGER.severe("Failed to create instance of Menu.");
-            LOGGER.severe("Given FQN: " + fullyQualifiedName);
-            LOGGER.severe("Decorator can't be applied to the object");
-            System.exit(40);
-        }
-        catch (Exception e)
-        {
-            LOGGER.severe("Failed to create instance of Menu.");
-            LOGGER.severe("Given FQN: " + fullyQualifiedName);
-            System.exit(50);
-        }
-        return record;
+        throw new IllegalArgumentException(
+            "No matching constructor in " + fqn + " for " + Arrays.toString(actualTypes));
+    }
+
+    /** primitive → wrapper; wrapper stays wrapper */
+    private static Class<?> wrap(Class<?> c) {
+        if (!c.isPrimitive()) return c;
+        return switch (c.getName()) {
+            case "int"    -> Integer.class;
+            case "long"   -> Long.class;
+            case "double" -> Double.class;
+            case "float"  -> Float.class;
+            case "char"   -> Character.class;
+            case "byte"   -> Byte.class;
+            case "short"  -> Short.class;
+            case "boolean"-> Boolean.class;
+            default       -> c;
+        };
     }
 
 }

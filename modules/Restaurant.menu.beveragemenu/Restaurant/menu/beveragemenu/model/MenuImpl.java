@@ -17,30 +17,24 @@ import Restaurant.menu.core.MenuComponent;
 public class MenuImpl extends MenuDecorator {
 
 	public boolean isIced;
-	public MenuImpl(Menu baseMenu, boolean isIced) {
-        this.MenuId = baseMenu.getMenuId();
-        this.name = baseMenu.getName();
-        this.description = baseMenu.getDescription();
-        this.price = baseMenu.getPrice();
-        this.category = baseMenu.getCategory();
-        this.isIced = isIced;
-    }
 	
 	public MenuImpl() {
         super();
-        this.objectName = MenuImpl.class.getName();
     }
     
     public MenuImpl(boolean isIced) {
     	super();
 		this.isIced = isIced;
-		this.objectName = MenuImpl.class.getName();
     }
 	
 	public MenuImpl(MenuComponent record, boolean isIced) {
 		super(record);
 		this.isIced = isIced;
-		this.objectName = MenuImpl.class.getName();
+	}
+
+	public MenuImpl(Menu record, boolean isIced) {
+	    super((MenuComponent) record);
+	    this.isIced = isIced;
 	}
 
 	public boolean getIsIced() {
@@ -53,6 +47,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setCategory(String category) {
 		this.category = category;
+		this.record.setCategory(category);
 	}
 
 	public String getCategory() {
@@ -61,6 +56,8 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setPrice(int price) {
 		this.price = price;
+		this.record.setPrice(price);
+		
 	}
 
 	public int getPrice() {
@@ -69,6 +66,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setDescription(String description) {
 		this.description = description;
+		this.record.setDescription(description);
 	}
 	public String getDescription() {
 		return this.description;
@@ -76,6 +74,7 @@ public class MenuImpl extends MenuDecorator {
 
 	public void setName(String name) {
 		this.name = name;
+		this.record.setName(name);
 	}
 
 	public String getName() {
@@ -90,4 +89,11 @@ public class MenuImpl extends MenuDecorator {
 		this.MenuId = MenuId;
 	}
 
+	@Override
+	public HashMap<String, Object> toHashMap() {
+		HashMap<String, Object> menuMap = super.toHashMap();
+		menuMap.put("beverageMenuId", getMenuId());
+		menuMap.put("isIced", getIsIced());
+		return menuMap;
+	}
 }

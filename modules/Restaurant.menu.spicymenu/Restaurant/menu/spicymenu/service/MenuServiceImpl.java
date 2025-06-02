@@ -12,87 +12,57 @@ public class MenuServiceImpl extends MenuServiceDecorator {
         super(record);
     }
 
-    public List<HashMap<String,Object>> saveMenu(Map<String, Object> requestBody){
-        return null;
-    }
-
-    // @Override
-    // public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange) {
-    //     if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-    //         return null;
-    //     }
-    //     Menu menu = createMenu(vmjExchange.getPayload());
-    //     this.menuRepository.saveObject(menu);
-    //     return getAllMenu(vmjExchange.getPayload());
-    // }
-
     public Menu createMenu(Map<String, Object> requestBody){        
         int spiceLevel = Integer.parseInt(String.valueOf(requestBody.get("spiceLevel")));
         Menu menu = record.createMenu(requestBody);
         Menu menuSpicyMenu = MenuFactory.createMenu("Restaurant.menu.spicymenu.MenuImpl", menu, spiceLevel);
-        this.menuRepository.saveObject(menuSpicyMenu);
+        menuRepository.saveObject(menuSpicyMenu);
         return menuSpicyMenu;
     }
 
-    public Menu createMenu(Map<String, Object> requestBody, int id){
-        String name = (String) requestBody.get("name");
-        String desc = (String) requestBody.get("description");
-        String priceStr = (String) requestBody.get("price");
-        int price = Integer.parseInt(priceStr);
-        String category = (String) requestBody.get("category");
-        int spiceLevel = Integer.parseInt(String.valueOf(requestBody.get("spiceLevel")));
-        
-        Menu menu = MenuFactory.createMenu("Restaurant.menu.spicymenu.MenuImpl", name, desc, price, category, spiceLevel);
-        return menu;
-    }
-
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
-        String idStr = (String) requestBody.get("MenuId");
-        int id = Integer.parseInt(idStr);
-        Menu menu = this.menuRepository.getObject(id);
-        
-        menu.setName((String) requestBody.get("name"));
-        menu.setDescription((String) requestBody.get("description"));
-        String priceStr = (String) requestBody.get("price");
-        menu.setPrice(Integer.parseInt(priceStr));
-        menu.setCategory((String) requestBody.get("category"));
-        
-        this.menuRepository.updateObject(menu);
-        
-        return menu.toHashMap();
+		String idStr = (String) requestBody.get("menuId");
+		UUID menuId = UUID.fromString(idStr);
+		Menu menu =this.menuRepository.getObject(menuId);
+		
+		menu.setName((String) requestBody.get("name"));
+		menu.setDescription((String) requestBody.get("description"));
+		String priceStr = (String) requestBody.get("price");
+		menu.setPrice(Integer.parseInt(priceStr));
+		menu.setCategory((String) requestBody.get("category"));
+		String spiceLevelStr = (String) requestBody.get("spiceLevel");
+		((MenuImpl) menu).setSpiceLevel(Integer.parseInt(spiceLevelStr));
+		
+		
+		menuRepository.updateObject(menu);
+				
+		return menu.toHashMap();
+		
     }
 
     public HashMap<String, Object> getMenu(Map<String, Object> requestBody){
-        List<HashMap<String, Object>> menuList = getAllMenu(requestBody);
-        String idStr = ((String) requestBody.get("id"));
-        UUID id = UUID.fromString(idStr);
-        for (HashMap<String,Object> menu : menuList){
-            String record_id_str = String.valueOf(((Double) menu.get("record_id")).intValue());
-            if (record_id_str.equals(idStr)){
-                return menu;
-            }
-        }
-        return null;
+		String idStr = ((String) requestBody.get("menuId"));
+		UUID menuId = UUID.fromString(idStr);
+		try {
+    	
+    	HashMap<String, Object> menu = getMenuById(menuId);
+    	return menu;
+		}
+		
+		catch(Exception e){
+			return null;
+		}
     }
 
     public HashMap<String, Object> getMenuById(int id){
-        Menu menu = this.menuRepository.getObject(id);
+        Menu menu = menuRepository.getObject(id);
         return menu.toHashMap();
     }
 
     public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-        String table = "menu_comp";
-        
-        if (requestBody != null && requestBody.get("menu_impl") != null) {
-            table = (String) requestBody.get("menu_impl");
-        }
-        
-        if (table == null) {
-            table = "menu_comp"; 
-        }
-        
-        List<Menu> List = this.menuRepository.getAllObject(table);
-        return transformListToHashMap(List);
+		String table = "menu_spicymenu";
+		List<Menu> List = menuRepository.getAllObject(table);
+		return transformListToHashMap(List);
     }
 
     public List<HashMap<String,Object>> transformListToHashMap(List<Menu> List){
@@ -105,25 +75,18 @@ public class MenuServiceImpl extends MenuServiceDecorator {
     }
 
     public List<HashMap<String,Object>> deleteMenu(Map<String, Object> requestBody){
-        String idStr = ((String) requestBody.get("id"));
-        int id = Integer.parseInt(idStr);
-        this.menuRepository.deleteObject(id);
-        return getAllMenu(requestBody);
-    }
+		String idStr = ((String) requestBody.get("menuId"));
+		String baseMenuIdStr = (String) requestBody.get("baseMenuId");
+		UUID menuId = UUID.fromString(idStr);
 
-    public void createMenu() {
-        // TODO: implement this method
-    }
+	    Menu spicyMenu = this.menuRepository.getObject(menuId);
+	    MenuImpl menuImpl = (MenuImpl)spicyMenu;
 
-    public void deleteMenu() {
-        // TODO: implement this method
-    }
+    	UUID baseMenuId = UUID.fromString(baseMenuIdStr);
 
-    public void getPrice() {
-        // TODO: implement this method
-    }
+		menuRepository.deleteObject(menuId);
+		menuRepository.deleteObject(baseMenuId);
 
-    public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){
-        return null;
-    }  
+		return getAllMenu();
+    }
 }

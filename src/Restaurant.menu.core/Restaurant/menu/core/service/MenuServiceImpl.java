@@ -40,19 +40,6 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		return menu;
 	}
 
-    public Menu createMenu(Map<String, Object> requestBody, int id){
-		String name = (String) requestBody.get("name");
-		String desc = (String) requestBody.get("description");
-		String priceStr = (String) requestBody.get("price");
-		int price = Integer.parseInt(priceStr);
-		String category = (String) requestBody.get("category");
-		
-		//to do: fix association attributes
-		
-		Menu menu = MenuFactory.createMenu("Restaurant.menu.core.MenuImpl", name, desc, price, category);
-		return menu;
-	}
-
     public HashMap<String, Object> updateMenu(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("menuId");
 		
@@ -93,8 +80,8 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		return menu.toHashMap();
 	}
 
-    public List<HashMap<String,Object>> getAllMenu(Map<String, Object> requestBody){
-		String table = (String) requestBody.get("table_name");
+    public List<HashMap<String,Object>> getAllMenu(){
+		String table = "menu_impl";
 		List<Menu> List =this.menuRepository.getAllObject(table);
 		return transformListToHashMap(List);
 	}
@@ -112,11 +99,7 @@ public class MenuServiceImpl extends MenuServiceComponent{
 		String idStr = ((String) requestBody.get("menuId"));
 		UUID menuId = UUID.fromString(idStr);
 		this.menuRepository.deleteObject(menuId);
-		return getAllMenu(requestBody);
+		return getAllMenu();
 	}
-
-	public Menu createMenu(Map<String, Object> requestBody, Map<String, Object> response){
-		return null;
-	}  
 
 }

@@ -17,32 +17,26 @@ import Restaurant.menu.core.MenuComponent;
 public class MenuImpl extends MenuDecorator {
 
     public int spiceLevel;
-    public MenuImpl(Menu baseMenu, int spiceLevel) {
-        this.MenuId = baseMenu.getMenuId();
-        this.name = baseMenu.getName();
-        this.description = baseMenu.getDescription();
-        this.price = baseMenu.getPrice();
-        this.category = baseMenu.getCategory();
-        this.spiceLevel = spiceLevel;
-    }
     
     public MenuImpl() {
         super();
-        this.objectName = MenuImpl.class.getName();
     }
     
     public MenuImpl(int spiceLevel) {
         super();
         this.spiceLevel = spiceLevel;
-        this.objectName = MenuImpl.class.getName();
     }
     
     public MenuImpl(MenuComponent record, int spiceLevel) {
         super(record);
         this.spiceLevel = spiceLevel;
-        this.objectName = MenuImpl.class.getName();
     }
 
+	public MenuImpl(Menu record, int spiceLevel) {
+	    super((MenuComponent) record);
+	    this.spiceLevel = spiceLevel;
+	}
+	
     public int getSpiceLevel() {
         return spiceLevel;
     }
@@ -51,42 +45,55 @@ public class MenuImpl extends MenuDecorator {
         this.spiceLevel = spiceLevel;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+		this.record.setCategory(category);
+	}
 
-    public String getCategory() {
-        return this.category;
-    }
+	public String getCategory() {
+		return this.category;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public void setPrice(int price) {
+		this.price = price;
+		this.record.setPrice(price);
+		
+	}
 
-    public int getPrice() {
-        return this.price;
-    }
+	public int getPrice() {
+		return this.price;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getDescription() {
-        return this.description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+		this.record.setDescription(description);
+	}
+	public String getDescription() {
+		return this.description;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+		this.record.setName(name);
+	}
 
-    public String getName() {
-        return this.name;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public UUID getMenuId() {
-        return this.MenuId;
-    }
+	public UUID getMenuId() {
+		return this.MenuId;
+	}
 
-    public void setMenuId(UUID MenuId) {
-        this.MenuId = MenuId;
-    }
+	public void setMenuId(UUID MenuId) {
+		this.MenuId = MenuId;
+	}
+
+	@Override
+	public HashMap<String, Object> toHashMap() {
+		HashMap<String, Object> menuMap = super.toHashMap();
+		menuMap.put("spicyMenuId", getMenuId());
+		menuMap.put("spiceLevel", getSpiceLevel());
+		return menuMap;
+	}
 }

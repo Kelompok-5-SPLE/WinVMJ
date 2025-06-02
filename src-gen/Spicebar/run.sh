@@ -18,9 +18,9 @@ tail -f java.log --pid=$TEE_PID | while read -r LINE; do
     fi
 done
 
-echo "SELECT 'CREATE DATABASE restaurantservicesystem_product_spicebar' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'restaurantservicesystem_product_spicebar') \gexec" | psql "postgresql://postgres:iniKUNCI123@localhost"
+echo "SELECT 'CREATE DATABASE restaurantservicesystem_product_spicebar' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'restaurantservicesystem_product_spicebar') \gexec" | psql "postgresql://postgres:postgres@localhost"
 for file in sql/*.sql; do
-    psql -a -f "$file" "postgresql://postgres:iniKUNCI123@localhost/restaurantservicesystem_product_spicebar"
+    psql -a -f "$file" "postgresql://postgres:postgres@localhost/restaurantservicesystem_product_spicebar"
 done
 
 wait

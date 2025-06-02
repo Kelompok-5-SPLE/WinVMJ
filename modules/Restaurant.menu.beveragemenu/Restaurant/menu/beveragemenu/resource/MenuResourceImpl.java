@@ -21,41 +21,11 @@ public class MenuResourceImpl extends MenuResourceDecorator {
     
 	// @Restriced(permission = "")
     @Route(url="call/beveragemenu")
-	public HashMap<String,Object> menu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody);
-			return result.toHashMap();
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-    
-    // @Restriced(permission = "")
-    @Route(url="call/beveragemenu/save")
-    public List<HashMap<String,Object>> saveMenu(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody);
-			return List.of(result.toHashMap());
-
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-    
     public HashMap<String,Object> createMenu(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Menu result = menuServiceImpl.createMenu(requestBody);
 			return result.toHashMap();
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-    public Menu createMenu(VMJExchange vmjExchange, int id){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Menu result = menuServiceImpl.createMenu(requestBody, id);
-			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}
@@ -81,8 +51,7 @@ public class MenuResourceImpl extends MenuResourceDecorator {
 	// @Restriced(permission = "")
     @Route(url="call/beveragemenu/list")
     public List<HashMap<String,Object>> getAllMenu(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload(); 
-		return menuServiceImpl.getAllMenu(requestBody);
+		return menuServiceImpl.getAllMenu();
 	}
 
 	// @Restriced(permission = "")
